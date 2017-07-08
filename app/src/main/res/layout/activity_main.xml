@@ -21,7 +21,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Test"
+            android:text="@string/delete_button"
             android:layout_weight="1"
             android:background="@color/colorButtonDelete"
             android:textColor="@color/colorWhiteText"
@@ -29,7 +29,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Test"
+            android:text="@string/create_button"
             android:layout_weight="1"
             android:background="@color/colorButtonCreate"
             android:textColor="@color/colorWhiteText"
