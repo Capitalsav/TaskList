@@ -7,8 +7,13 @@ import com.orm.SugarRecord;
  */
 
 public class MyStage extends SugarRecord<MyStage> {
+
     private int mStageNumber;
     private String mStageName;
+
+    public MyStage(){
+
+    }
 
     public MyStage(int mStageNumber, String mStageName) {
         this.mStageNumber = mStageNumber;

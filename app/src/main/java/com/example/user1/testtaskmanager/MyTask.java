@@ -4,12 +4,18 @@ import com.orm.SugarRecord;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class MyTask extends SugarRecord<MyTask> {
+
     private String mTaskName;
     private ArrayList<MyStage> myStages;
     private Calendar mStartDate;
     private Calendar mEndDate;
+
+    public MyTask(){
+
+    }
 
     public MyTask(String mTaskName, ArrayList<MyStage> myStages, Calendar mStartDate, Calendar mEndDate) {
         this.mTaskName = mTaskName;
