@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -61,4 +62,8 @@ public class MainActivity extends AppCompatActivity {
         mDataset = list;
     }
 
+
+    public void onClickCreateTask(View view) {
+
+    }
 }
