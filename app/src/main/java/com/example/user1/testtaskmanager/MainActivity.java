@@ -1,5 +1,6 @@
 package com.example.user1.testtaskmanager;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onClickCreateTask(View view) {
-
+        Intent intent = new Intent(this, CreateTaskActivity.class);
+        startActivity(intent);
     }
 }
