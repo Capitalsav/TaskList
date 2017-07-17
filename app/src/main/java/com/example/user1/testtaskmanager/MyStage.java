@@ -1,12 +1,7 @@
 package com.example.user1.testtaskmanager;
 
-import com.orm.SugarRecord;
 
-/**
- * Created by user1 on 06.07.17.
- */
-
-public class MyStage extends SugarRecord<MyStage> {
+public class MyStage{
 
     private int mStageNumber;
     private String mStageName;

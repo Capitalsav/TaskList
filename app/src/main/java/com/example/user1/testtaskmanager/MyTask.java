@@ -1,12 +1,11 @@
 package com.example.user1.testtaskmanager;
 
-import com.orm.SugarRecord;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class MyTask extends SugarRecord<MyTask> {
+public class MyTask{
 
     private String mTaskName;
     private ArrayList<MyStage> myStages;
