@@ -24,5 +24,6 @@ public final class TaskManagerContract {
         public final static String _ID = BaseColumns._ID;
         public final static String COLUMN_STAGE_NAME = "name";
         public final static String COLUMN_STAGE_NUMBER = "number";
+        public final static String COLUMN_STAGE_TASK_ID = "task_id";
     }
 }

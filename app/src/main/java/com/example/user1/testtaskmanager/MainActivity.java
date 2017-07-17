@@ -1,6 +1,7 @@
 package com.example.user1.testtaskmanager;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
 
     private final static String TAG = "=================TAG: ";
 
+    private TaskManagerDbHelper mTaskManagerDbHelper;
+
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -27,22 +30,28 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        mTaskManagerDbHelper = new TaskManagerDbHelper(this);
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-
         mRecyclerView.setHasFixedSize(true);
 
         /*use linear layout manager*/
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-
         mAdapter = new RecyclerViewAdapter(mDataset);
         mRecyclerView.setAdapter(mAdapter);
+        //==============
+        createDb();
+        //==============
     }
 
 
     public void onClickCreateTask(View view) {
         Intent intent = new Intent(this, CreateTaskActivity.class);
         startActivity(intent);
+    }
+
+    private void createDb() {
+        Log.d(TAG, "trtardsfdasfasfasf");
+        SQLiteDatabase db = mTaskManagerDbHelper.getReadableDatabase();
     }
 }
