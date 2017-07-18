@@ -3,4 +3,6 @@
     <string name="create_button">Create</string>
     <string name="delete_button">Delete</string>
     <string name="save_task_button">Save</string>
+    <string name="input_stage_name_title">Please enter stage</string>
+    <string name="create_stage_button">Create stage</string>
 </resources>

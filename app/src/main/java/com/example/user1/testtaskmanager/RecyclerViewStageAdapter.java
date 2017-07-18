@@ -7,34 +7,35 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class RecyclerViewStageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-    private List<MyStage> mStageList;
+    private ArrayList<MyStage> mStageList = null;
 
-    public RecyclerViewStageAdapter(List<MyStage> list) {mStageList = list;}
+    public RecyclerViewStageAdapter(ArrayList<MyStage> list) {mStageList = list;}
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder newHolder = null;
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_stage_item, parent, false);
         newHolder = new RecyclerStageHolder(view);
-        return null;
+        return newHolder;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         MyStage myStage = mStageList.get(position);
         RecyclerStageHolder recyclerStageHolder = (RecyclerStageHolder) holder;
-        recyclerStageHolder.mStageNumber.setText(myStage.getmStageNumber());
+        recyclerStageHolder.mStageNumber.setText(String.valueOf(position + 1));
         recyclerStageHolder.mStageTitle.setText(myStage.getmStageName());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mStageList.size();
     }
 
     class RecyclerStageHolder extends RecyclerView.ViewHolder {

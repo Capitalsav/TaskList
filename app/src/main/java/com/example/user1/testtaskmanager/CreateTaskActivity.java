@@ -1,6 +1,9 @@
 package com.example.user1.testtaskmanager;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,11 +11,15 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class CreateTaskActivity extends AppCompatActivity {
+public class CreateTaskActivity extends AppCompatActivity
+        implements EditStageDialogFragment.EditStageDialogListener{
 
     private final static String TAG = "=================TAG";
     private final static int DIALOG_START_DATE = 1;
@@ -22,11 +29,12 @@ public class CreateTaskActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    private List<MyStage> myStageList;
+    private ArrayList<MyStage> myStageList;
 
     private String mTaskTitle;
-    private String startDateString;
-    private String endDateString;
+    private String mStartDateString;
+    private String mEndDateString;
+//    private ArrayList<String> mStagesTexts;
 
     private Calendar currentDate;
 
@@ -34,18 +42,15 @@ public class CreateTaskActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_task);
+        myStageList = new ArrayList<>();
 
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view_stages);
-
         mRecyclerView.setHasFixedSize(true);
-
         /*user linear layout manager*/
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-
         mAdapter = new RecyclerViewStageAdapter(myStageList);
         mRecyclerView.setAdapter(mAdapter);
-
         currentDate = Calendar.getInstance();
     }
 
@@ -68,6 +73,7 @@ public class CreateTaskActivity extends AppCompatActivity {
     DatePickerDialog.OnDateSetListener startDateListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+            /*call StringBuilder once*/
             if (view.isShown()) {
                 StringBuilder builder = new StringBuilder();
                 builder.append(year);
@@ -75,8 +81,7 @@ public class CreateTaskActivity extends AppCompatActivity {
                 builder.append(month);
                 builder.append("-");
                 builder.append(dayOfMonth);
-                startDateString = builder.toString();
-                Log.d(TAG, startDateString);
+                mStartDateString = builder.toString();
             }
         }
     };
@@ -85,6 +90,7 @@ public class CreateTaskActivity extends AppCompatActivity {
 
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+            /*call StringBuilder once*/
             if (view.isShown()) {
                 StringBuilder builder = new StringBuilder();
                 builder.append(year);
@@ -92,9 +98,28 @@ public class CreateTaskActivity extends AppCompatActivity {
                 builder.append(month);
                 builder.append("-");
                 builder.append(dayOfMonth);
-                endDateString = builder.toString();
-                Log.d(TAG, endDateString);
+                mEndDateString = builder.toString();
             }
         }
     };
+
+    public void onClickCreateStage(View view) {
+        FragmentManager manager = getSupportFragmentManager();
+        EditStageDialogFragment editStageDialogFragment = new EditStageDialogFragment();
+        editStageDialogFragment.show(manager, "fragment_edit_stage");
+    }
+
+    @Override
+    public void onFinishEditStageDialog(DialogFragment dialogFragment) {
+        Dialog dialog = dialogFragment.getDialog();
+        EditText editText = (EditText) dialog.findViewById(R.id.edit_text_stage_name);
+        MyStage myStage = new MyStage();
+        myStage.setmStageName(editText.getText().toString());
+//        myStage.setmStageNumber(myStageList.size() + 1);
+        Log.d(TAG, String.valueOf(myStage.getmStageNumber()));
+        myStageList.add(myStage);
+        Log.d(TAG, "test");
+        mAdapter.notifyDataSetChanged();
+    }
+
 }

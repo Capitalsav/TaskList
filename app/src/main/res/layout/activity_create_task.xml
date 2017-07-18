@@ -14,10 +14,18 @@ tools:context="com.example.user1.testtaskmanager.MainActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/my_recycler_view_stages"
-        android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:scrollbars="vertical" />
+
+    <Button
+        android:id="@+id/btn_create_stage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create_stage_button"
+        android:layout_gravity="center_horizontal"
+        android:onClick="onClickCreateStage"/>
     <TextView
         android:id="@+id/tv_start_date"
         android:layout_width="match_parent"
