@@ -39,9 +39,7 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new RecyclerViewAdapter(mDataset);
         mRecyclerView.setAdapter(mAdapter);
-        //==============
-        createDb();
-        //==============
+        
     }
 
 
@@ -50,8 +48,5 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void createDb() {
-        Log.d(TAG, "trtardsfdasfasfasf");
-        SQLiteDatabase db = mTaskManagerDbHelper.getReadableDatabase();
-    }
+
 }
