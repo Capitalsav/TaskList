@@ -79,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
                 String taskName = cursor.getString(nameColumnIndex);
                 ArrayList<MyStage> stageArrayList = new ArrayList<>();
 
+                String startDateString = cursor.getString(startDateColumnIndex);
+                String endDateString = cursor.getString(endDateColumnIndex);
+
                 String [] selectionStage = {
                         TaskManagerContract.StageInDb.COLUMN_STAGE_NAME,
                         TaskManagerContract.StageInDb.COLUMN_STAGE_NUMBER,
@@ -109,6 +112,8 @@ public class MainActivity extends AppCompatActivity {
                 MyTask myTask = new MyTask();
                 myTask.setmTaskName(taskName);
                 myTask.setMyStages(stageArrayList);
+                myTask.setmStartDate(getCalendarFromString(startDateString));
+                myTask.setmEndDate(getCalendarFromString(endDateString));
                 taskArrayList.add(myTask);
             }
         }
@@ -119,5 +124,18 @@ public class MainActivity extends AppCompatActivity {
             cursor.close();
             database.close();
         }
+    }
+
+    private Calendar getCalendarFromString(String string) {
+        int firstLineIndexOf = string.indexOf("-");
+        int lastLineIndexOf = string.lastIndexOf("-");
+        Calendar calendar = Calendar.getInstance();
+        int year = Integer.parseInt(string.substring(0, firstLineIndexOf));
+        int month = Integer.parseInt(string.substring(firstLineIndexOf + 1, lastLineIndexOf));
+        int day = Integer.parseInt(string.substring(lastLineIndexOf + 1, string.length()));
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.DAY_OF_MONTH, day);
+        return calendar;
     }
 }
