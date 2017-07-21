@@ -3,7 +3,10 @@ package com.example.user1.testtaskmanager;
 
 public class MyStage{
 
-    private int mStageNumber;
+    public final static int NOT_DONE = 0;
+    public final static int DONE = 1;
+
+    private int isStageDone;
     private String mStageName;
 
     public MyStage(){
@@ -11,16 +14,16 @@ public class MyStage{
     }
 
     public MyStage(int mStageNumber, String mStageName) {
-        this.mStageNumber = mStageNumber;
+        this.isStageDone = mStageNumber;
         this.mStageName = mStageName;
     }
 
-    public int getmStageNumber() {
-        return mStageNumber;
+    public int getIsStageDone() {
+        return isStageDone;
     }
 
-    public void setmStageNumber(int mStageNumber) {
-        this.mStageNumber = mStageNumber;
+    public void setIsStageDone(int mStageNumber) {
+        this.isStageDone = mStageNumber;
     }
 
     public String getmStageName() {

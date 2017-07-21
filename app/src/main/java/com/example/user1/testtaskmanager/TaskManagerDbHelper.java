@@ -28,7 +28,7 @@ public class TaskManagerDbHelper extends SQLiteOpenHelper {
 
         String SQL_CREATE_STAGE_TABLE = "CREATE TABLE " + TaskManagerContract.StageInDb.TABLE_NAME
                 + " (" + TaskManagerContract.StageInDb._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + TaskManagerContract.StageInDb.COLUMN_STAGE_NUMBER + " INTEGER NOT NULL, "
+                + TaskManagerContract.StageInDb.COLUMN_STAGE_IS_DONE + " INTEGER NOT NULL, "
                 + TaskManagerContract.StageInDb.COLUMN_STAGE_NAME + " TEXT NOT NULL, "
                 + TaskManagerContract.StageInDb.COLUMN_STAGE_TASK_ID + " INTEGER NOT NULL, "
                 + "FOREIGN KEY(" + TaskManagerContract.StageInDb.COLUMN_STAGE_TASK_ID + ") "

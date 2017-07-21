@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
                 String [] selectionStage = {
                         TaskManagerContract.StageInDb.COLUMN_STAGE_NAME,
-                        TaskManagerContract.StageInDb.COLUMN_STAGE_NUMBER,
+                        TaskManagerContract.StageInDb.COLUMN_STAGE_IS_DONE,
                         TaskManagerContract.StageInDb.COLUMN_STAGE_TASK_ID
                 };
 
@@ -102,11 +102,12 @@ public class MainActivity extends AppCompatActivity {
                 );
                 int idStageColumnIndex = cursorStage.getColumnIndex(TaskManagerContract.StageInDb._ID);
                 int nameStageColumnIndex = cursorStage.getColumnIndex(TaskManagerContract.StageInDb.COLUMN_STAGE_NAME);
-                int numnberStageColumnIndex = cursorStage.getColumnIndex(TaskManagerContract.StageInDb.COLUMN_STAGE_NUMBER);
+                int isDoneStageColumnIndex = cursorStage.getColumnIndex(TaskManagerContract.StageInDb.COLUMN_STAGE_IS_DONE);
 
                 while (cursorStage.moveToNext()){
                     MyStage myStage = new MyStage();
                     myStage.setmStageName(cursorStage.getString(nameStageColumnIndex));
+                    myStage.setIsStageDone(cursorStage.getInt(isDoneStageColumnIndex));
                     stageArrayList.add(myStage);
                 }
                 MyTask myTask = new MyTask();

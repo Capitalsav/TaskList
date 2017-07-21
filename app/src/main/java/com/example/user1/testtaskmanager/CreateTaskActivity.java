@@ -80,7 +80,7 @@ public class CreateTaskActivity extends AppCompatActivity
                     MyStage stage = myStageList.get(i);
                     ContentValues contentValuesStage = new ContentValues();
                     contentValuesStage.put(TaskManagerContract.StageInDb.COLUMN_STAGE_NAME, stage.getmStageName());
-                    contentValuesStage.put(TaskManagerContract.StageInDb.COLUMN_STAGE_NUMBER, i + 1);
+                    contentValuesStage.put(TaskManagerContract.StageInDb.COLUMN_STAGE_IS_DONE, MyStage.NOT_DONE);
                     contentValuesStage.put(TaskManagerContract.StageInDb.COLUMN_STAGE_TASK_ID, newRowId);
                     try {
                         long newRowIdStage = database.insert(TaskManagerContract.StageInDb.TABLE_NAME, null, contentValuesStage);
@@ -164,10 +164,7 @@ public class CreateTaskActivity extends AppCompatActivity
         EditText editText = (EditText) dialog.findViewById(R.id.edit_text_stage_name);
         MyStage myStage = new MyStage();
         myStage.setmStageName(editText.getText().toString());
-//        myStage.setmStageNumber(myStageList.size() + 1);
-        Log.d(TAG, String.valueOf(myStage.getmStageNumber()));
         myStageList.add(myStage);
-        Log.d(TAG, "test");
         mAdapter.notifyDataSetChanged();
     }
 
