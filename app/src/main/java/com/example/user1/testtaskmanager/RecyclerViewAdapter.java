@@ -1,10 +1,12 @@
 package com.example.user1.testtaskmanager;
 
+import android.animation.ObjectAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -35,6 +37,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         RecyclerTaskHolder recyclerTaskHolder = (RecyclerTaskHolder) holder;
         recyclerTaskHolder.taskTitle.setText(myTask.getmTaskName());
         recyclerTaskHolder.progressBarDate.setProgress(getDateProgressValue(myTask.getmStartDate(), myTask.getmEndDate()));
+        recyclerTaskHolder.progressBarStage.setProgress(getStageProgressValue(myTask));
+
     }
 
     private int getDateProgressValue(Calendar calendarStart, Calendar calendarEnd) {
@@ -52,8 +56,24 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         else {
             return (100 * (curDays - firstDays) / (lastDays-firstDays));
         }
+    }
 
-
+    private int getStageProgressValue(MyTask myTask) {
+        int doneCount = 0;
+        int allCount = 0;
+        ArrayList<MyStage> stageArrayList = myTask.getMyStages();
+        for (MyStage stage : stageArrayList){
+            if (stage.getIsStageDone() == MyStage.DONE){
+                doneCount++;
+            }
+            allCount++;
+        }
+        try {
+            return (100 * doneCount / allCount);
+        }
+        catch (ArithmeticException ex) {
+            return MAX_PROGRESS_VALUE;
+        }
     }
 
     @Override
@@ -65,11 +85,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         TextView taskTitle = null;
         ProgressBar progressBarDate = null;
+        ProgressBar progressBarStage = null;
 
         public RecyclerTaskHolder(View itemView) {
             super(itemView);
             taskTitle = (TextView) itemView.findViewById(R.id.tv_title_of_recycler_item);
             progressBarDate = (ProgressBar) itemView.findViewById(R.id.horizontal_progress_id);
+            progressBarStage = (ProgressBar) itemView.findViewById(R.id.circle_progress_id);
         }
     }
 }
