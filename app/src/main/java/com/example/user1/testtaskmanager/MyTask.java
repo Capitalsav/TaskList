@@ -1,11 +1,13 @@
 package com.example.user1.testtaskmanager;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class MyTask{
+
+public class MyTask implements Serializable{
 
     private String mTaskName;
     private ArrayList<MyStage> myStages;

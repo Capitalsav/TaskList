@@ -1,6 +1,8 @@
 package com.example.user1.testtaskmanager;
 
 import android.animation.ObjectAnimator;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,9 +16,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final static int MAX_PROGRESS_VALUE = 100;
+
     private List<MyTask> mList = null;
 
     public RecyclerViewAdapter(List<MyTask> arrayList) {
@@ -80,17 +83,29 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return mList.size();
     }
 
-    class RecyclerTaskHolder extends RecyclerView.ViewHolder {
+
+
+    public class RecyclerTaskHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView taskTitle = null;
         ProgressBar progressBarDate = null;
         ProgressBar progressBarStage = null;
+        private  Context context;
 
         public RecyclerTaskHolder(View itemView) {
             super(itemView);
             taskTitle = (TextView) itemView.findViewById(R.id.tv_title_of_recycler_item);
             progressBarDate = (ProgressBar) itemView.findViewById(R.id.horizontal_progress_id);
             progressBarStage = (ProgressBar) itemView.findViewById(R.id.circle_progress_id);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            context = v.getContext();
+            Intent intent = new Intent(context, ViewTaskActivity.class);
+            intent.putExtra(ViewTaskActivity.INTENT_EXTRA_TASK, mList.get(getPosition()));
+            context.startActivity(intent);
         }
     }
 }

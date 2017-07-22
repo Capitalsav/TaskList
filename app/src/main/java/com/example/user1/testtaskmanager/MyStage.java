@@ -1,7 +1,9 @@
 package com.example.user1.testtaskmanager;
 
 
-public class MyStage{
+import java.io.Serializable;
+
+public class MyStage implements Serializable{
 
     public final static int NOT_DONE = 0;
     public final static int DONE = 1;
