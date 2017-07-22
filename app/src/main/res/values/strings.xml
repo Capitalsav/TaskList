@@ -5,4 +5,5 @@
     <string name="save_task_button">Save</string>
     <string name="input_stage_name_title">Please enter stage</string>
     <string name="create_stage_button">Create stage</string>
+    <string name="back_button">Back</string>
 </resources>
