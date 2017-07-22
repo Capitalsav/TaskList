@@ -38,7 +38,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         recyclerTaskHolder.taskTitle.setText(myTask.getmTaskName());
         recyclerTaskHolder.progressBarDate.setProgress(getDateProgressValue(myTask.getmStartDate(), myTask.getmEndDate()));
         recyclerTaskHolder.progressBarStage.setProgress(getStageProgressValue(myTask));
-
     }
 
     private int getDateProgressValue(Calendar calendarStart, Calendar calendarEnd) {
