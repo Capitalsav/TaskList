@@ -8,6 +8,8 @@ public class MyStage implements Serializable{
     public final static int NOT_DONE = 0;
     public final static int DONE = 1;
 
+    private int stageId;
+
     private int isStageDone;
     private String mStageName;
 
@@ -18,6 +20,14 @@ public class MyStage implements Serializable{
     public MyStage(int mStageNumber, String mStageName) {
         this.isStageDone = mStageNumber;
         this.mStageName = mStageName;
+    }
+
+    public int getStageId() {
+        return stageId;
+    }
+
+    public void setStageId(int stageId) {
+        this.stageId = stageId;
     }
 
     public int getIsStageDone() {

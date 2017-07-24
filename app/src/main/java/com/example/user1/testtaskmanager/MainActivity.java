@@ -40,9 +40,13 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new RecyclerViewAdapter(taskArrayList);
         mRecyclerView.setAdapter(mAdapter);
-        selectAllTasks();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        selectAllTasks();
+    }
 
     public void onClickCreateTask(View view) {
         Intent intent = new Intent(this, CreateTaskActivity.class);
@@ -83,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 String endDateString = cursor.getString(endDateColumnIndex);
 
                 String [] selectionStage = {
+                        TaskManagerContract.StageInDb._ID,
                         TaskManagerContract.StageInDb.COLUMN_STAGE_NAME,
                         TaskManagerContract.StageInDb.COLUMN_STAGE_IS_DONE,
                         TaskManagerContract.StageInDb.COLUMN_STAGE_TASK_ID
@@ -106,11 +111,13 @@ public class MainActivity extends AppCompatActivity {
 
                 while (cursorStage.moveToNext()){
                     MyStage myStage = new MyStage();
+                    myStage.setStageId(cursorStage.getInt(idStageColumnIndex));
                     myStage.setmStageName(cursorStage.getString(nameStageColumnIndex));
                     myStage.setIsStageDone(cursorStage.getInt(isDoneStageColumnIndex));
                     stageArrayList.add(myStage);
                 }
                 MyTask myTask = new MyTask();
+                myTask.setTaskId(currentId);
                 myTask.setmTaskName(taskName);
                 myTask.setMyStages(stageArrayList);
                 myTask.setmStartDate(getCalendarFromString(startDateString));
@@ -139,4 +146,5 @@ public class MainActivity extends AppCompatActivity {
         calendar.set(Calendar.DAY_OF_MONTH, day);
         return calendar;
     }
+
 }

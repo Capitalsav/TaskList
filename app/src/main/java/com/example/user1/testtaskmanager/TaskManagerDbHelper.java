@@ -33,7 +33,7 @@ public class TaskManagerDbHelper extends SQLiteOpenHelper {
                 + TaskManagerContract.StageInDb.COLUMN_STAGE_TASK_ID + " INTEGER NOT NULL, "
                 + "FOREIGN KEY(" + TaskManagerContract.StageInDb.COLUMN_STAGE_TASK_ID + ") "
                 + "REFERENCES " + TaskManagerContract.TaskInDb.TABLE_NAME + "("
-                + TaskManagerContract.TaskInDb._ID + ") );";
+                + TaskManagerContract.TaskInDb._ID + ") ON DELETE CASCADE);";
 
         db.execSQL(SQL_CREATE_STAGE_TABLE);
     }

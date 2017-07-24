@@ -30,7 +30,8 @@
     <Button
         android:id="@+id/btn_stage_done"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:onClick="onClickStageDone"/>
     <TextView
         android:id="@+id/tv_stages_description"
         android:layout_width="match_parent"
@@ -56,7 +57,8 @@
             android:layout_weight="1"
             android:background="@color/colorButtonDelete"
             android:textColor="@color/colorWhiteText"
-            android:textSize="10pt" />
+            android:textSize="10pt"
+            android:onClick="onClickDeleteSingleTask"/>
     </LinearLayout>
 </LinearLayout>
 

@@ -1,8 +1,12 @@
 package com.example.user1.testtaskmanager;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -22,6 +26,8 @@ public class ViewTaskActivity extends AppCompatActivity {
 
     private MyTask myTask;
 
+    private TaskManagerDbHelper taskManagerDbHelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,7 @@ public class ViewTaskActivity extends AppCompatActivity {
         textViewTitle.setText(myTask.getmTaskName());
         textViewStartDate.setText(format.format(myTask.getmStartDate().getTime()));
         textViewEndDate.setText(format.format(myTask.getmEndDate().getTime()));
+        taskManagerDbHelper = new TaskManagerDbHelper(this);
         setCurrentStage();
     }
 
@@ -54,6 +61,91 @@ public class ViewTaskActivity extends AppCompatActivity {
                 String stageDescription = stageDone + "/" + allStagesCount;
                 textViewStageCount.setText(stageDescription);
                 break;
+            }
+        }
+        checkStagesDone();
+    }
+
+    public void onClickStageDone(View view) {
+        ArrayList<MyStage> arrayList = myTask.getMyStages();
+        for (int i = 0; i < arrayList.size(); i++) {
+            if (arrayList.get(i).getIsStageDone() == MyStage.NOT_DONE){
+                if (setStageDoneDb(arrayList.get(i).getStageId()) >= 0) {
+                    arrayList.get(i).setIsStageDone(MyStage.DONE);
+                    setCurrentStage();
+                }
+                else {
+                    Log.d("==============", "Error in database");
+                }
+                break;
+            }
+        }
+    }
+
+    private int setStageDoneDb(int stageId) {
+        Log.d("=============StageId", String.valueOf(stageId));
+        SQLiteDatabase database = taskManagerDbHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(TaskManagerContract.StageInDb.COLUMN_STAGE_IS_DONE, MyStage.DONE);
+        String[] whereValues = {String.valueOf(stageId)};
+        int rows = -1;
+        try {
+           rows = database.update(TaskManagerContract.StageInDb.TABLE_NAME, contentValues,
+                    TaskManagerContract.StageInDb._ID + "= ?", whereValues );
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            database.close();
+        }
+        Log.d("===============", "updated " + rows);
+        return rows;
+    }
+
+    private int deleteTask(int taskId) {
+        SQLiteDatabase database = taskManagerDbHelper.getWritableDatabase();
+        int rows = -1;
+        try {
+            rows = database.delete(TaskManagerContract.TaskInDb.TABLE_NAME, TaskManagerContract.TaskInDb._ID + "= ?", new String[]{String.valueOf(taskId)});
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            database.close();
+        }
+        return rows;
+
+    }
+
+    public void onClickDeleteSingleTask(View view) {
+        if (deleteTask(myTask.getTaskId()) >= 0) {
+            Log.d("==============", "success");
+        }
+        else {
+            Log.d("================", "Error when delete");
+        }
+    }
+
+    private void checkStagesDone() {
+        ArrayList<MyStage> arrayList = myTask.getMyStages();
+        int count = 0;
+        for (MyStage stage : arrayList){
+            if (stage.getIsStageDone() == MyStage.DONE) {
+                count++;
+            }
+        }
+        int size = arrayList.size();
+        Log.d("===========ArrList.size", String.valueOf(size));
+        Log.d("========ArrList.count", String.valueOf(count));
+        if (arrayList.size() == count){
+            if (deleteTask(myTask.getTaskId()) >= 0) {
+                Log.d("==============", "success");
+            }
+            else {
+                Log.d("================", "Error when delete");
             }
         }
     }
