@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 null
         );
 
-        try{
+        try {
             int idColumnIndex = cursor.getColumnIndex(TaskManagerContract.TaskInDb._ID);
             int nameColumnIndex = cursor.getColumnIndex(TaskManagerContract.TaskInDb.COLUMN_TASK_NAME);
             int startDateColumnIndex = cursor.getColumnIndex(TaskManagerContract.TaskInDb.COLUMN_TASK_START_DATE);
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 String startDateString = cursor.getString(startDateColumnIndex);
                 String endDateString = cursor.getString(endDateColumnIndex);
 
-                String [] selectionStage = {
+                String[] selectionStage = {
                         TaskManagerContract.StageInDb._ID,
                         TaskManagerContract.StageInDb.COLUMN_STAGE_NAME,
                         TaskManagerContract.StageInDb.COLUMN_STAGE_IS_DONE,
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                 int nameStageColumnIndex = cursorStage.getColumnIndex(TaskManagerContract.StageInDb.COLUMN_STAGE_NAME);
                 int isDoneStageColumnIndex = cursorStage.getColumnIndex(TaskManagerContract.StageInDb.COLUMN_STAGE_IS_DONE);
 
-                while (cursorStage.moveToNext()){
+                while (cursorStage.moveToNext()) {
                     MyStage myStage = new MyStage();
                     myStage.setStageId(cursorStage.getInt(idStageColumnIndex));
                     myStage.setmStageName(cursorStage.getString(nameStageColumnIndex));
@@ -122,13 +122,12 @@ public class MainActivity extends AppCompatActivity {
                 myTask.setMyStages(stageArrayList);
                 myTask.setmStartDate(getCalendarFromString(startDateString));
                 myTask.setmEndDate(getCalendarFromString(endDateString));
+                myTask.setChecked(false);//default set false for isChecked
                 taskArrayList.add(myTask);
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             cursor.close();
             database.close();
         }
@@ -147,4 +146,29 @@ public class MainActivity extends AppCompatActivity {
         return calendar;
     }
 
+    public void onClickDeleteMultipleTask(View view) {
+        for (MyTask myTask : taskArrayList) {
+            if (myTask.isChecked()) {
+                if (deleteTask(myTask.getTaskId()) >= 0) {
+                    mAdapter.notifyDataSetChanged();
+                    Log.d(TAG, "delete success multiple");
+                } else {
+                    Log.d(TAG, "delete error multiple");
+                }
+            }
+        }
+    }
+
+    private int deleteTask(int taskId) {
+        SQLiteDatabase database = mTaskManagerDbHelper.getWritableDatabase();
+        int rows = -1;
+        try {
+            rows = database.delete(TaskManagerContract.TaskInDb.TABLE_NAME, TaskManagerContract.TaskInDb._ID + "= ?", new String[]{String.valueOf(taskId)});
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            database.close();
+        }
+        return rows;
+    }
 }

@@ -17,6 +17,8 @@ public class MyTask implements Serializable{
     private ArrayList<MyStage> myStages;
     private Calendar mStartDate;
     private Calendar mEndDate;
+    private boolean isChecked;
+
 
     public MyTask(){
 
@@ -67,5 +69,13 @@ public class MyTask implements Serializable{
 
     public void setTaskId(int taskId) {
         this.taskId = taskId;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 }

@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -41,6 +43,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         recyclerTaskHolder.taskTitle.setText(myTask.getmTaskName());
         recyclerTaskHolder.progressBarDate.setProgress(getDateProgressValue(myTask.getmStartDate(), myTask.getmEndDate()));
         recyclerTaskHolder.progressBarStage.setProgress(getStageProgressValue(myTask));
+        recyclerTaskHolder.checkBox.setChecked(mList.get(position).isChecked());
     }
 
     private int getDateProgressValue(Calendar calendarStart, Calendar calendarEnd) {
@@ -90,6 +93,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         TextView taskTitle = null;
         ProgressBar progressBarDate = null;
         ProgressBar progressBarStage = null;
+        CheckBox checkBox = null;
         private  Context context;
 
         public RecyclerTaskHolder(View itemView) {
@@ -97,7 +101,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             taskTitle = (TextView) itemView.findViewById(R.id.tv_title_of_recycler_item);
             progressBarDate = (ProgressBar) itemView.findViewById(R.id.horizontal_progress_id);
             progressBarStage = (ProgressBar) itemView.findViewById(R.id.circle_progress_id);
+            checkBox = (CheckBox) itemView.findViewById(R.id.checkbox_id);
             itemView.setOnClickListener(this);
+            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        mList.get(getPosition()).setChecked(true);
+                    }
+                    else {
+                        mList.get(getPosition()).setChecked(false);
+                    }
+                }
+            });
         }
 
         @Override

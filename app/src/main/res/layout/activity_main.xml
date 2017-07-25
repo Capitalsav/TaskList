@@ -25,7 +25,8 @@
             android:layout_weight="1"
             android:background="@color/colorButtonDelete"
             android:textColor="@color/colorWhiteText"
-            android:textSize="10pt"/>
+            android:textSize="10pt"
+            android:onClick="onClickDeleteMultipleTask"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
