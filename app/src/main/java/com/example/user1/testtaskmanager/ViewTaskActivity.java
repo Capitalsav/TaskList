@@ -48,6 +48,14 @@ public class ViewTaskActivity extends AppCompatActivity {
         setCurrentStage();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent();
+        setResult(RESULT_CANCELED, intent);
+        finish();
+    }
+
     private void setCurrentStage() {
         ArrayList<MyStage> stageArrayList = myTask.getMyStages();
         int allStagesCount = stageArrayList.size();
@@ -123,6 +131,9 @@ public class ViewTaskActivity extends AppCompatActivity {
     public void onClickDeleteSingleTask(View view) {
         if (deleteTask(myTask.getTaskId()) >= 0) {
             Log.d("==============", "success");
+            Intent intent = new Intent();
+            setResult(RESULT_OK, intent);
+            finish();
         }
         else {
             Log.d("================", "Error when delete");
@@ -143,10 +154,19 @@ public class ViewTaskActivity extends AppCompatActivity {
         if (arrayList.size() == count){
             if (deleteTask(myTask.getTaskId()) >= 0) {
                 Log.d("==============", "success");
+                Intent intent = new Intent();
+                setResult(RESULT_OK, intent);
+                finish();
             }
             else {
                 Log.d("================", "Error when delete");
             }
         }
+    }
+
+    public void onClickBackFromViewTask(View view) {
+        Intent intent = new Intent();
+        setResult(RESULT_CANCELED, intent);
+        finish();
     }
 }

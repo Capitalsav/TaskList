@@ -1,6 +1,7 @@
 package com.example.user1.testtaskmanager;
 
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -121,7 +122,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             context = v.getContext();
             Intent intent = new Intent(context, ViewTaskActivity.class);
             intent.putExtra(ViewTaskActivity.INTENT_EXTRA_TASK, mList.get(getPosition()));
-            context.startActivity(intent);
+            ((Activity)context).startActivityForResult(intent, MainActivity.REQUEST_CODE_VIEW_TASK);
         }
     }
 }

@@ -3,6 +3,7 @@ package com.example.user1.testtaskmanager;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class CreateTaskActivity extends AppCompatActivity
@@ -34,6 +36,8 @@ public class CreateTaskActivity extends AppCompatActivity
     private ArrayList<MyStage> myStageList;
 
     private String mTaskTitle;
+    private Calendar startDateCalendar;
+    private Calendar endDateCalendar;
     private String mStartDateString;
     private String mEndDateString;
 //    private ArrayList<String> mStagesTexts;
@@ -57,6 +61,8 @@ public class CreateTaskActivity extends AppCompatActivity
         mAdapter = new RecyclerViewStageAdapter(myStageList);
         mRecyclerView.setAdapter(mAdapter);
         currentDate = Calendar.getInstance();
+        startDateCalendar = new GregorianCalendar();
+        endDateCalendar = new GregorianCalendar();
         taskManagerDbHelper = new TaskManagerDbHelper(this);
         editText = (EditText) findViewById(R.id.edit_task_name);
     }
@@ -105,6 +111,17 @@ public class CreateTaskActivity extends AppCompatActivity
         finally {
             database.close();
         }
+        Intent intent = new Intent();
+        setResult(RESULT_OK, intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent();
+        setResult(RESULT_CANCELED, intent);
+        finish();
     }
 
     public void onClickStartDate(View view) {
@@ -131,6 +148,7 @@ public class CreateTaskActivity extends AppCompatActivity
                 builder.append("-");
                 builder.append(dayOfMonth);
                 mStartDateString = builder.toString();
+                startDateCalendar.set(year, month, dayOfMonth);
             }
         }
     };
@@ -148,6 +166,7 @@ public class CreateTaskActivity extends AppCompatActivity
                 builder.append("-");
                 builder.append(dayOfMonth);
                 mEndDateString = builder.toString();
+                endDateCalendar.set(year, month, dayOfMonth);
             }
         }
     };

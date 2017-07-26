@@ -17,7 +17,10 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    public final static int REQUEST_CODE_VIEW_TASK = 2;
+    public final static String INTENT_RESULT_NEW_TASK = "new task";
     private final static String TAG = "=================TAG: ";
+    private final static int REQUEST_CODE_NEW_TASK = 1;
 
     private TaskManagerDbHelper mTaskManagerDbHelper;
 
@@ -40,17 +43,41 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new RecyclerViewAdapter(taskArrayList);
         mRecyclerView.setAdapter(mAdapter);
+        selectAllTasks();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        selectAllTasks();
+
     }
 
     public void onClickCreateTask(View view) {
         Intent intent = new Intent(this, CreateTaskActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, REQUEST_CODE_NEW_TASK);
+//        startActivity(intent);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case REQUEST_CODE_NEW_TASK:
+//                    MyTask myTask = (MyTask) data.getSerializableExtra(INTENT_RESULT_NEW_TASK);
+//                    taskArrayList.add(myTask);
+                    taskArrayList.clear();
+                    mAdapter.notifyDataSetChanged();
+                    selectAllTasks();
+                    mAdapter.notifyDataSetChanged();
+                    Log.d(TAG, " select all");
+                case REQUEST_CODE_VIEW_TASK:
+                    taskArrayList.clear();
+                    mAdapter.notifyDataSetChanged();
+                    selectAllTasks();
+                    mAdapter.notifyDataSetChanged();
+                    Log.d(TAG, " select all");
+            }
+        }
     }
 
     private void selectAllTasks() {
