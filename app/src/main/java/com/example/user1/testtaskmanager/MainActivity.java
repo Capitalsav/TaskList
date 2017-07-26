@@ -147,9 +147,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickDeleteMultipleTask(View view) {
-        for (MyTask myTask : taskArrayList) {
-            if (myTask.isChecked()) {
-                if (deleteTask(myTask.getTaskId()) >= 0) {
+        for (int i = taskArrayList.size() - 1; i >= 0; i--) {
+            if (taskArrayList.get(i).isChecked()) {
+                if (deleteTask(taskArrayList.get(i).getTaskId()) >= 0) {
+                    taskArrayList.remove(taskArrayList.get(i));
+                    //deleteTaskFromList(myTask.getTaskId());
                     mAdapter.notifyDataSetChanged();
                     Log.d(TAG, "delete success multiple");
                 } else {
