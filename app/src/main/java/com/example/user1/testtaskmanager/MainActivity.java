@@ -1,5 +1,7 @@
 package com.example.user1.testtaskmanager;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -17,6 +19,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    public final static String INENT_LIST_FOR_NOTIFICATION = "tasks for notification";
     public final static int REQUEST_CODE_VIEW_TASK = 2;
     public final static String INTENT_RESULT_NEW_TASK = "new task";
     private final static String TAG = "=================TAG: ";
@@ -29,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
 
     private ArrayList<MyTask> taskArrayList = new ArrayList<>();
+
+    private AlarmManager alarmManager;
+    private Calendar currentCalendar;
+    private Calendar targetCalendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +50,12 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new RecyclerViewAdapter(taskArrayList);
         mRecyclerView.setAdapter(mAdapter);
+        alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        currentCalendar = Calendar.getInstance();
+        targetCalendar = Calendar.getInstance();
+        targetCalendar.set(Calendar.HOUR, 8);
+        targetCalendar.set(Calendar.MINUTE, 30);
+        targetCalendar.set(Calendar.SECOND, 0);
         selectAllTasks();
     }
 
@@ -158,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
             cursor.close();
             database.close();
         }
+        setUserNotifications();
     }
 
     private Calendar getCalendarFromString(String string) {
@@ -199,5 +213,22 @@ public class MainActivity extends AppCompatActivity {
             database.close();
         }
         return rows;
+    }
+
+    private void setUserNotifications() {
+        long targetTime = targetCalendar.getTimeInMillis();
+        long currentTime = targetCalendar.getTimeInMillis();
+
+        Intent intent = new Intent(this, MyScheduledReceiver.class);
+        intent.putExtra(INENT_LIST_FOR_NOTIFICATION, taskArrayList);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        if (currentTime >= targetTime) {
+            targetCalendar.add(Calendar.DAY_OF_MONTH, 1);
+            targetTime = targetCalendar.getTimeInMillis();
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, targetTime, AlarmManager.INTERVAL_DAY, pendingIntent);
+        }
+        else {
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, targetTime, AlarmManager.INTERVAL_DAY, pendingIntent);
+        }
     }
 }

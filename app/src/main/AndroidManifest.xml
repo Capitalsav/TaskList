@@ -16,7 +16,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".CreateTaskActivity" />
-        <activity android:name=".ViewTaskActivity"></activity>
+        <activity android:name=".ViewTaskActivity" />
+
+        <receiver
+            android:name=".MyScheduledReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
     </application>
 
 </manifest>
