@@ -34,7 +34,7 @@ tools:context="com.example.user1.testtaskmanager.MainActivity">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorDarkText"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:text="@string/select_start_date"
         android:layout_gravity="center_horizontal"/>
     <Button
@@ -51,7 +51,7 @@ tools:context="com.example.user1.testtaskmanager.MainActivity">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorDarkText"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:text="@string/select_end_date"
         android:layout_gravity="center_horizontal"/>
     <Button

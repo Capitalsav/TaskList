@@ -15,8 +15,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -47,6 +51,9 @@ public class CreateTaskActivity extends AppCompatActivity
     private TaskManagerDbHelper taskManagerDbHelper;
     private EditText editText;
 
+    private TextView textViewStartDate;
+    private TextView textViewEndDate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,59 +68,75 @@ public class CreateTaskActivity extends AppCompatActivity
         mAdapter = new RecyclerViewStageAdapter(myStageList);
         mRecyclerView.setAdapter(mAdapter);
         currentDate = Calendar.getInstance();
-        startDateCalendar = new GregorianCalendar();
-        endDateCalendar = new GregorianCalendar();
+        startDateCalendar = Calendar.getInstance();
+        endDateCalendar = Calendar.getInstance();
         taskManagerDbHelper = new TaskManagerDbHelper(this);
         editText = (EditText) findViewById(R.id.edit_task_name);
+        textViewStartDate = (TextView) findViewById(R.id.tv_start_date);
+        textViewEndDate = (TextView) findViewById(R.id.tv_end_date);
     }
 
     public void onClickSaveTask(View view) {
         /*TODO return to previous activity and error handle*/
-        Log.d(TAG, "00000000000000");
-        SQLiteDatabase database = taskManagerDbHelper.getWritableDatabase();
-        try {
+        if (editText.getText().toString().equals("")){
+            Toast.makeText(this, "Please input task title", Toast.LENGTH_SHORT).show();
+        }
+        else if (myStageList.size() == 0) {
+            Toast.makeText(this, "Please create 1 stage", Toast.LENGTH_SHORT).show();
+        }
+        else if (mStartDateString == null || mStartDateString.equals("")) {
+            Toast.makeText(this, "Please select start date", Toast.LENGTH_SHORT).show();
+        }
+        else if (mEndDateString == null || mEndDateString.equals("")){
+            Toast.makeText(this, "Please select end date", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            SQLiteDatabase database = taskManagerDbHelper.getWritableDatabase();
+            try {
 
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(TaskManagerContract.TaskInDb.COLUMN_TASK_NAME, editText.getText().toString());
-            contentValues.put(TaskManagerContract.TaskInDb.COLUMN_TASK_START_DATE, mStartDateString);
-            contentValues.put(TaskManagerContract.TaskInDb.COLUMN_TASK_END_DATE, mEndDateString);
-            long newRowId = database.insert(TaskManagerContract.TaskInDb.TABLE_NAME, null, contentValues);
-            if (newRowId != -1) {
-                Log.d(TAG, String.valueOf(newRowId));
+                ContentValues contentValues = new ContentValues();
+                contentValues.put(TaskManagerContract.TaskInDb.COLUMN_TASK_NAME, editText.getText().toString());
+                contentValues.put(TaskManagerContract.TaskInDb.COLUMN_TASK_START_DATE, mStartDateString);
+                contentValues.put(TaskManagerContract.TaskInDb.COLUMN_TASK_END_DATE, mEndDateString);
+                long newRowId = database.insert(TaskManagerContract.TaskInDb.TABLE_NAME, null, contentValues);
+                if (newRowId != -1) {
+                    Log.d(TAG, String.valueOf(newRowId));
 //                String selectQuery = "SELECT " + TaskManagerContract.TaskInDb._ID + " FROM " +
 //                        TaskManagerContract.TaskInDb.TABLE_NAME +
-                for (int i = 0; i < myStageList.size(); i++) {
-                    MyStage stage = myStageList.get(i);
-                    ContentValues contentValuesStage = new ContentValues();
-                    contentValuesStage.put(TaskManagerContract.StageInDb.COLUMN_STAGE_NAME, stage.getmStageName());
-                    contentValuesStage.put(TaskManagerContract.StageInDb.COLUMN_STAGE_IS_DONE, MyStage.NOT_DONE);
-                    contentValuesStage.put(TaskManagerContract.StageInDb.COLUMN_STAGE_TASK_ID, newRowId);
-                    try {
-                        long newRowIdStage = database.insert(TaskManagerContract.StageInDb.TABLE_NAME, null, contentValuesStage);
-                        if (newRowIdStage != -1) {
-                            Log.d(TAG, String.valueOf(newRowIdStage));
+                    for (int i = 0; i < myStageList.size(); i++) {
+                        MyStage stage = myStageList.get(i);
+                        ContentValues contentValuesStage = new ContentValues();
+                        contentValuesStage.put(TaskManagerContract.StageInDb.COLUMN_STAGE_NAME, stage.getmStageName());
+                        contentValuesStage.put(TaskManagerContract.StageInDb.COLUMN_STAGE_IS_DONE, MyStage.NOT_DONE);
+                        contentValuesStage.put(TaskManagerContract.StageInDb.COLUMN_STAGE_TASK_ID, newRowId);
+                        try {
+                            long newRowIdStage = database.insert(TaskManagerContract.StageInDb.TABLE_NAME, null, contentValuesStage);
+                            if (newRowIdStage != -1) {
+                                Log.d(TAG, String.valueOf(newRowIdStage));
+                            }
+                            else {
+                                Log.d(TAG, String.valueOf(newRowIdStage));
+                            }
                         }
-                        else {
-                            Log.d(TAG, String.valueOf(newRowIdStage));
+                        catch (Exception e) {
+                            e.printStackTrace();
                         }
-                    }
-                    catch (Exception e) {
-                        e.printStackTrace();
                     }
                 }
+                else {
+                    Log.d(TAG, "row not inserted");
+                }
+            }catch (Exception e) {
+                e.printStackTrace();
             }
-            else {
-                Log.d(TAG, "row not inserted");
+            finally {
+                database.close();
             }
-        }catch (Exception e) {
-            e.printStackTrace();
+            Intent intent = new Intent();
+            setResult(RESULT_OK, intent);
+            finish();
         }
-        finally {
-            database.close();
-        }
-        Intent intent = new Intent();
-        setResult(RESULT_OK, intent);
-        finish();
+
     }
 
     @Override
@@ -149,6 +172,9 @@ public class CreateTaskActivity extends AppCompatActivity
                 builder.append(dayOfMonth);
                 mStartDateString = builder.toString();
                 startDateCalendar.set(year, month, dayOfMonth);
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//                String string = format.format(startDateCalendar.getTime());
+                textViewStartDate.setText(format.format(startDateCalendar.getTime()));
             }
         }
     };
@@ -167,6 +193,8 @@ public class CreateTaskActivity extends AppCompatActivity
                 builder.append(dayOfMonth);
                 mEndDateString = builder.toString();
                 endDateCalendar.set(year, month, dayOfMonth);
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                textViewEndDate.setText(format.format(endDateCalendar.getTime()));
             }
         }
     };
