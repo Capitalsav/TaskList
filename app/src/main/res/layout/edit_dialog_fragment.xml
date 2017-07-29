@@ -7,11 +7,13 @@
         android:id="@+id/tv_input_stage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/input_stage_name_title"/>
+        android:text="@string/input_stage_name_title"
+        android:textColor="@color/colorDarkText"/>
 
     <EditText
         android:id="@+id/edit_text_stage_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorDarkText"/>
 
 </LinearLayout>

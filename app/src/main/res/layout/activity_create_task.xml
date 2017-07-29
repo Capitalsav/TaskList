@@ -10,7 +10,8 @@ tools:context="com.example.user1.testtaskmanager.MainActivity">
     <EditText
         android:id="@+id/edit_task_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorDarkText"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/my_recycler_view_stages"
@@ -29,7 +30,8 @@ tools:context="com.example.user1.testtaskmanager.MainActivity">
     <TextView
         android:id="@+id/tv_start_date"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorDarkText"/>
     <Button
         android:id="@+id/btn_start_date_dialog"
         android:layout_width="match_parent"
@@ -38,7 +40,8 @@ tools:context="com.example.user1.testtaskmanager.MainActivity">
     <TextView
         android:id="@+id/tv_end_date"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorDarkText"/>
     <Button
         android:id="@+id/btn_end_date_dialog"
         android:layout_width="match_parent"
