@@ -8,4 +8,5 @@
     <color name="colorWhiteText">#FFFFFF</color>
     <color name="colorButtonBack">#3F51B5</color>
     <color name="colorDarkText">#000000</color>
+    <color name="colorDateButton">#E65100</color>
 </resources>

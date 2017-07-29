@@ -6,4 +6,8 @@
     <string name="input_stage_name_title">Please enter stage</string>
     <string name="create_stage_button">Create stage</string>
     <string name="back_button">Back</string>
+    <string name="start_date_button">Start date</string>
+    <string name="end_date_button">End date</string>
+    <string name="select_start_date">Select start date</string>
+    <string name="select_end_date">Select end date</string>
 </resources>

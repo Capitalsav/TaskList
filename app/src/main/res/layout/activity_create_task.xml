@@ -26,27 +26,43 @@ tools:context="com.example.user1.testtaskmanager.MainActivity">
         android:layout_height="wrap_content"
         android:text="@string/create_stage_button"
         android:layout_gravity="center_horizontal"
-        android:onClick="onClickCreateStage"/>
+        android:onClick="onClickCreateStage"
+        android:background="@color/colorButtonCreate"
+        android:textColor="@color/colorWhiteText"/>
     <TextView
         android:id="@+id/tv_start_date"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorDarkText"/>
+        android:textColor="@color/colorDarkText"
+        android:textSize="16sp"
+        android:text="@string/select_start_date"
+        android:layout_gravity="center_horizontal"/>
     <Button
         android:id="@+id/btn_start_date_dialog"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onClickStartDate"/>
+        android:onClick="onClickStartDate"
+        android:text="@string/start_date_button"
+        android:layout_gravity="center"
+        android:background="@color/colorDateButton"
+        android:textColor="@color/colorWhiteText"/>
     <TextView
         android:id="@+id/tv_end_date"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorDarkText"/>
+        android:textColor="@color/colorDarkText"
+        android:textSize="16sp"
+        android:text="@string/select_end_date"
+        android:layout_gravity="center_horizontal"/>
     <Button
         android:id="@+id/btn_end_date_dialog"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onClickEndDate"/>
+        android:onClick="onClickEndDate"
+        android:text="@string/end_date_button"
+        android:layout_gravity="center"
+        android:background="@color/colorDateButton"
+        android:textColor="@color/colorWhiteText"/>
     <Button
         android:id="@+id/btn_save_task"
         android:layout_width="match_parent"
