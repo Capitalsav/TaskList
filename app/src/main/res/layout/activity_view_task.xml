@@ -9,39 +9,54 @@
 
     <TextView
         android:id="@+id/tv_task_title_view"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textColor="@color/colorDarkText"/>
+        android:textColor="@color/colorDarkText"
+        android:textSize="28sp"
+        android:layout_gravity="center_horizontal"/>
     <TextView
         android:id="@+id/tv_start_date_view"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textColor="@color/colorDarkText"/>
+        android:textColor="@color/colorDarkText"
+        android:textSize="28sp"
+        android:layout_gravity="center_horizontal"/>
     <TextView
         android:id="@+id/tv_end_date_view"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textColor="@color/colorDarkText"/>
+        android:textColor="@color/colorDarkText"
+        android:textSize="28sp"
+        android:layout_gravity="center_horizontal"/>
     <TextView
         android:id="@+id/tv_stages_count_view"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textColor="@color/colorDarkText"/>
+        android:textColor="@color/colorDarkText"
+        android:textSize="28sp"
+        android:layout_gravity="center_horizontal"/>
     <Button
         android:id="@+id/btn_stage_done"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onClickStageDone"/>
+        android:onClick="onClickStageDone"
+        android:textSize="28sp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/colorButtonCreate"
+        android:text="@string/stage_done_button"
+        android:textColor="@color/colorWhiteText"/>
     <TextView
         android:id="@+id/tv_stages_description"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textColor="@color/colorDarkText"/>
+        android:textColor="@color/colorDarkText"
+        android:textSize="28sp"
+        android:layout_gravity="center_horizontal"/>
 
     <LinearLayout
         android:layout_width="match_parent"
