@@ -17,6 +17,7 @@
         android:indeterminate="false"
         android:max="100"
         android:progress="69"
+        android:rotation="-90"
         android:progressDrawable="@drawable/circular" />
 
     <LinearLayout
