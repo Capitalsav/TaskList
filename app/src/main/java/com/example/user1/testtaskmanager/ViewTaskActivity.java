@@ -75,6 +75,7 @@ public class ViewTaskActivity extends AppCompatActivity {
     }
 
     public void onClickStageDone(View view) {
+        Log.d("===============", "onCLickstageDone");
         ArrayList<MyStage> arrayList = myTask.getMyStages();
         for (int i = 0; i < arrayList.size(); i++) {
             if (arrayList.get(i).getIsStageDone() == MyStage.NOT_DONE){

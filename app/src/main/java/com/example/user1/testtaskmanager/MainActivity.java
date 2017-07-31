@@ -78,6 +78,13 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(TAG, " select all");
             }
         }
+        else  {
+            taskArrayList.clear();
+            mAdapter.notifyDataSetChanged();
+            selectAllTasks();
+            mAdapter.notifyDataSetChanged();
+            Log.d(TAG, " select all");
+        }
     }
 
     private void selectAllTasks() {

@@ -11,7 +11,8 @@ tools:context="com.example.user1.testtaskmanager.MainActivity">
         android:id="@+id/edit_task_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorDarkText"/>
+        android:textColor="@color/colorDarkText"
+        android:maxLength="15"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/my_recycler_view_stages"
