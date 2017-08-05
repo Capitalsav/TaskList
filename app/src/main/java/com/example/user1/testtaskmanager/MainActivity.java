@@ -19,7 +19,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    public final static String INENT_LIST_FOR_NOTIFICATION = "tasks for notification";
+    public final static String INTENT_LIST_FOR_NOTIFICATION = "tasks for notification";
     public final static int REQUEST_CODE_VIEW_TASK = 2;
     public final static String INTENT_RESULT_NEW_TASK = "new task";
     private final static String TAG = "=================TAG: ";
@@ -219,8 +219,12 @@ public class MainActivity extends AppCompatActivity {
         long targetTime = targetCalendar.getTimeInMillis();
         long currentTime = targetCalendar.getTimeInMillis();
 
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (int i = 0; i < taskArrayList.size(); i++) {
+            arrayList.add(taskArrayList.get(i).getmTaskName());
+        }
         Intent intent = new Intent(this, MyScheduledReceiver.class);
-        intent.putExtra(INENT_LIST_FOR_NOTIFICATION, taskArrayList);
+        intent.putStringArrayListExtra(INTENT_LIST_FOR_NOTIFICATION, arrayList);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
         if (currentTime >= targetTime) {
             targetCalendar.add(Calendar.DAY_OF_MONTH, 1);

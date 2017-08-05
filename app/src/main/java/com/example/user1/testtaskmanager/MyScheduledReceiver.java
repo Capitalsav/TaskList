@@ -21,18 +21,16 @@ public class MyScheduledReceiver extends BroadcastReceiver {
 
         NotificationManager notificationManager = (NotificationManager) context
                 .getSystemService(Context.NOTIFICATION_SERVICE);
-        ArrayList<MyTask> arrayList = (ArrayList<MyTask>) intent.getSerializableExtra(MainActivity.INENT_LIST_FOR_NOTIFICATION);
+        ArrayList<String> arrayList = intent.getStringArrayListExtra(MainActivity.INTENT_LIST_FOR_NOTIFICATION);
         for (int i = 0; i < arrayList.size(); i++) {
             Notification notification = new Notification.Builder(context)
                     .setContentIntent(contentIntent)
-                    .setContentTitle(arrayList.get(i).getmTaskName()) // Заголовок уведомления
+                    .setContentTitle(arrayList.get(i))
                     .setSmallIcon(R.mipmap.ic_launcher)
                     .setTicker("")
-                    // текст в строке состояния
                     .setWhen(System.currentTimeMillis()).setAutoCancel(true)
                     .build();
-
-            notificationManager.notify(arrayList.get(i).getTaskId(), notification);
+            notificationManager.notify(i, notification);
         }
 
     }
