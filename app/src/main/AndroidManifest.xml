@@ -18,6 +18,11 @@
         <activity android:name=".CreateTaskActivity"
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".ViewTaskActivity"></activity>
+
+        <receiver
+            android:name=".MyScheduledReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
     </application>
 
 </manifest>
