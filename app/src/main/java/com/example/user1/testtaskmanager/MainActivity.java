@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /*TODO refactor this method*/
     private void selectAllTasks() {
         SQLiteDatabase database = mTaskManagerDbHelper.getReadableDatabase();
         String[] selection = {
