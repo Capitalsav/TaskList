@@ -44,8 +44,6 @@ public class MainActivity extends AppCompatActivity {
         mTaskManagerDbHelper = new TaskManagerDbHelper(this);
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);
-
-        /*use linear layout manager*/
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new RecyclerViewAdapter(taskArrayList);
@@ -68,36 +66,15 @@ public class MainActivity extends AppCompatActivity {
     public void onClickCreateTask(View view) {
         Intent intent = new Intent(this, CreateTaskActivity.class);
         startActivityForResult(intent, REQUEST_CODE_NEW_TASK);
-//        startActivity(intent);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-            switch (requestCode) {
-                case REQUEST_CODE_NEW_TASK:
-//                    MyTask myTask = (MyTask) data.getSerializableExtra(INTENT_RESULT_NEW_TASK);
-//                    taskArrayList.add(myTask);
-                    taskArrayList.clear();
-                    mAdapter.notifyDataSetChanged();
-                    selectAllTasks();
-                    mAdapter.notifyDataSetChanged();
-                    Log.d(TAG, " select all");
-                case REQUEST_CODE_VIEW_TASK:
-                    taskArrayList.clear();
-                    mAdapter.notifyDataSetChanged();
-                    selectAllTasks();
-                    mAdapter.notifyDataSetChanged();
-                    Log.d(TAG, " select all");
-            }
-        }
-        else  {
-            taskArrayList.clear();
-            mAdapter.notifyDataSetChanged();
-            selectAllTasks();
-            mAdapter.notifyDataSetChanged();
-            Log.d(TAG, " select all");
-        }
+        taskArrayList.clear();
+        mAdapter.notifyDataSetChanged();
+        selectAllTasks();
+        mAdapter.notifyDataSetChanged();
+
     }
 
     private void selectAllTasks() {
@@ -181,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
         setUserNotifications();
     }
 
+    /*TODO refactor this method*/
     private Calendar getCalendarFromString(String string) {
         int firstLineIndexOf = string.indexOf("-");
         int lastLineIndexOf = string.lastIndexOf("-");
@@ -199,11 +177,9 @@ public class MainActivity extends AppCompatActivity {
             if (taskArrayList.get(i).isChecked()) {
                 if (deleteTask(taskArrayList.get(i).getTaskId()) >= 0) {
                     taskArrayList.remove(taskArrayList.get(i));
-                    //deleteTaskFromList(myTask.getTaskId());
                     mAdapter.notifyDataSetChanged();
-                    Log.d(TAG, "delete success multiple");
                 } else {
-                    Log.d(TAG, "delete error multiple");
+                    /*TODO notification for user if error occurred*/
                 }
             }
         }
@@ -224,8 +200,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUserNotifications() {
         long targetTime = targetCalendar.getTimeInMillis();
-        long currentTime = targetCalendar.getTimeInMillis();
-
+        long currentTime = currentCalendar.getTimeInMillis();
         ArrayList<String> arrayList = new ArrayList<>();
         for (int i = 0; i < taskArrayList.size(); i++) {
             arrayList.add(taskArrayList.get(i).getmTaskName());
