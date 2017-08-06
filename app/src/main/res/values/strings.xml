@@ -15,4 +15,5 @@
     <string name="start_date">Start date:</string>
     <string name="end_date">End date:</string>
     <string name="stages_done">Stages done:</string>
+    <string name="stage_description">Stage description:</string>
 </resources>
