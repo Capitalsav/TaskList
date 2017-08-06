@@ -31,7 +31,9 @@ public class RecyclerViewStageAdapter extends RecyclerView.Adapter<RecyclerView.
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         MyStage myStage = mStageList.get(position);
         RecyclerStageHolder recyclerStageHolder = (RecyclerStageHolder) holder;
-        recyclerStageHolder.mStageNumber.setText(String.valueOf(position + 1));
+        String string = String.valueOf(position + 1) + ". ";
+//        recyclerStageHolder.mStageNumber.setText(String.valueOf(position + 1));
+        recyclerStageHolder.mStageNumber.setText(string);
         recyclerStageHolder.mStageTitle.setText(myStage.getmStageName());
     }
 
@@ -60,8 +62,5 @@ public class RecyclerViewStageAdapter extends RecyclerView.Adapter<RecyclerView.
                 }
             });
         }
-
-
-        /*TODO delete button onclick*/
     }
 }

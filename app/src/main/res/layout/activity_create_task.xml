@@ -5,7 +5,8 @@ xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical"
-tools:context="com.example.user1.testtaskmanager.MainActivity">
+tools:context="com.example.user1.testtaskmanager.MainActivity"
+    android:background="@color/colorBackgroundActivity">
 
     <EditText
         android:id="@+id/edit_task_name"
@@ -19,7 +20,8 @@ tools:context="com.example.user1.testtaskmanager.MainActivity">
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:scrollbars="vertical" />
+        android:scrollbars="vertical"
+        android:padding="6dp"/>
 
     <Button
         android:id="@+id/btn_create_stage"
