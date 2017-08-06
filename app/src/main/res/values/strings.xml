@@ -11,4 +11,8 @@
     <string name="select_start_date">Select start date</string>
     <string name="select_end_date">Select end date</string>
     <string name="stage_done_button">Stage done</string>
+    <string name="task_title">Task title:</string>
+    <string name="start_date">Start date:</string>
+    <string name="end_date">End date:</string>
+    <string name="stages_done">Stages done:</string>
 </resources>

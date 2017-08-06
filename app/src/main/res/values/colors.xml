@@ -4,11 +4,11 @@
     <color name="colorPrimaryDark">#1B5E20</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorButtonCreate">#4CAF50</color>
-    <color name="colorButtonDelete">#B71C1C</color>
+    <color name="colorButtonDelete">#F44336</color>
     <color name="colorWhiteText">#FFFFFF</color>
     <color name="colorButtonBack">#3F51B5</color>
-    <color name="colorDarkText">#000000</color>
+    <color name="colorDarkText">#455A64</color>
     <color name="colorDateButton">#E65100</color>
-    <color name="colorBackgroundActivity">#E0E0E0</color>
+    <color name="colorBackgroundActivity">#EEEEEE</color>
     <color name="colorBackgroundRecyclerViewItem">#FFFFFF</color>
 </resources>
