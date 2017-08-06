@@ -30,82 +30,72 @@
             android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 
-
-    <LinearLayout
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_weight="1"
-        android:padding="8dp">
-        <TextView
-            android:id="@+id/tv_start_date_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorDarkText"
-            android:textSize="24sp"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/start_date"
-            android:layout_weight="1"/>
-        <TextView
-            android:id="@+id/tv_start_date_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorDarkText"
-            android:textSize="24sp"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_weight="1"
-        android:padding="8dp">
-        <TextView
-            android:id="@+id/tv_end_date_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorDarkText"
-            android:textSize="24sp"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/end_date"
-            android:layout_weight="1"/>
-        <TextView
-            android:id="@+id/tv_end_date_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="@color/colorDarkText"
-            android:textSize="24sp"
-            android:layout_gravity="center_horizontal"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_weight="1"
-        android:padding="8dp">
-        <TextView
-            android:id="@+id/tv_stage_done_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorDarkText"
-            android:textSize="24sp"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/stages_done"
-            android:layout_weight="1"/>
-        <TextView
-            android:id="@+id/tv_stages_count_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="@color/colorDarkText"
-            android:textSize="24sp"
-            android:layout_gravity="center_horizontal"/>
-    </LinearLayout>
-
+        android:padding="16dp">
+        <TableRow
+            android:minHeight="40dp">
+            <TextView
+                android:id="@+id/tv_start_date_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorDarkText"
+                android:textSize="24sp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/start_date"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/tv_start_date_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorDarkText"
+                android:textSize="24sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"/>
+        </TableRow>
+        <TableRow
+            android:minHeight="40dp">
+            <TextView
+                android:id="@+id/tv_end_date_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorDarkText"
+                android:textSize="24sp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/end_date"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/tv_end_date_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/colorDarkText"
+                android:textSize="24sp"
+                android:layout_gravity="center_horizontal"/>
+        </TableRow>
+        <TableRow
+            android:minHeight="40dp">
+            <TextView
+                android:id="@+id/tv_stage_done_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorDarkText"
+                android:textSize="24sp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/stages_done"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/tv_stages_count_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/colorDarkText"
+                android:textSize="24sp"
+                android:layout_gravity="center_horizontal"/>
+        </TableRow>
+    </TableLayout>
 
     <Button
         android:id="@+id/btn_stage_done"
