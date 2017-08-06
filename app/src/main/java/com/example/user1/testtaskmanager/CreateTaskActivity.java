@@ -39,12 +39,10 @@ public class CreateTaskActivity extends AppCompatActivity
 
     private ArrayList<MyStage> myStageList;
 
-    private String mTaskTitle;
     private Calendar startDateCalendar;
     private Calendar endDateCalendar;
     private String mStartDateString;
     private String mEndDateString;
-//    private ArrayList<String> mStagesTexts;
 
     private Calendar currentDate;
 
@@ -76,6 +74,7 @@ public class CreateTaskActivity extends AppCompatActivity
         textViewEndDate = (TextView) findViewById(R.id.tv_end_date);
     }
 
+    /*TODO refactor this method*/
     public void onClickSaveTask(View view) {
         /*TODO return to previous activity and error handle*/
         if (editText.getText().toString().equals("")){
