@@ -29,26 +29,17 @@ import java.util.List;
 public class CreateTaskActivity extends AppCompatActivity
         implements EditStageDialogFragment.EditStageDialogListener{
 
-    private final static String TAG = "=================TAG";
-    private final static int DIALOG_START_DATE = 1;
-    private final static int DIALOG_END_DATE = 2;
-
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-
     private ArrayList<MyStage> myStageList;
-
     private Calendar startDateCalendar;
     private Calendar endDateCalendar;
     private String mStartDateString;
     private String mEndDateString;
-
     private Calendar currentDate;
-
     private TaskManagerDbHelper taskManagerDbHelper;
     private EditText editText;
-
     private TextView textViewStartDate;
     private TextView textViewEndDate;
 
@@ -57,10 +48,8 @@ public class CreateTaskActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_task);
         myStageList = new ArrayList<>();
-
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view_stages);
         mRecyclerView.setHasFixedSize(true);
-        /*user linear layout manager*/
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new RecyclerViewStageAdapter(myStageList);
@@ -76,7 +65,6 @@ public class CreateTaskActivity extends AppCompatActivity
 
     /*TODO refactor this method*/
     public void onClickSaveTask(View view) {
-        /*TODO return to previous activity and error handle*/
         if (editText.getText().toString().equals("")){
             Toast.makeText(this, "Please input task title", Toast.LENGTH_SHORT).show();
         }
@@ -99,9 +87,6 @@ public class CreateTaskActivity extends AppCompatActivity
                 contentValues.put(TaskManagerContract.TaskInDb.COLUMN_TASK_END_DATE, mEndDateString);
                 long newRowId = database.insert(TaskManagerContract.TaskInDb.TABLE_NAME, null, contentValues);
                 if (newRowId != -1) {
-                    Log.d(TAG, String.valueOf(newRowId));
-//                String selectQuery = "SELECT " + TaskManagerContract.TaskInDb._ID + " FROM " +
-//                        TaskManagerContract.TaskInDb.TABLE_NAME +
                     for (int i = 0; i < myStageList.size(); i++) {
                         MyStage stage = myStageList.get(i);
                         ContentValues contentValuesStage = new ContentValues();
@@ -111,19 +96,20 @@ public class CreateTaskActivity extends AppCompatActivity
                         try {
                             long newRowIdStage = database.insert(TaskManagerContract.StageInDb.TABLE_NAME, null, contentValuesStage);
                             if (newRowIdStage != -1) {
-                                Log.d(TAG, String.valueOf(newRowIdStage));
+                                /*TODO success result*/
                             }
                             else {
-                                Log.d(TAG, String.valueOf(newRowIdStage));
+                                /*TODO error message*/
                             }
                         }
                         catch (Exception e) {
                             e.printStackTrace();
+                            /*TODO error message*/
                         }
                     }
                 }
                 else {
-                    Log.d(TAG, "row not inserted");
+                    /*TODO show error toast*/
                 }
             }catch (Exception e) {
                 e.printStackTrace();
@@ -135,7 +121,6 @@ public class CreateTaskActivity extends AppCompatActivity
             setResult(RESULT_OK, intent);
             finish();
         }
-
     }
 
     @Override
@@ -147,21 +132,26 @@ public class CreateTaskActivity extends AppCompatActivity
     }
 
     public void onClickStartDate(View view) {
-        new DatePickerDialog(CreateTaskActivity.this, startDateListener,
+        final DatePickerDialog datePickerDialog = new DatePickerDialog(CreateTaskActivity.this, startDateListener,
                 currentDate.get(Calendar.YEAR), currentDate.get(Calendar.MONTH),
-                currentDate.get(Calendar.DAY_OF_MONTH)).show();
+                currentDate.get(Calendar.DAY_OF_MONTH));
+        DatePicker datePicker = datePickerDialog.getDatePicker();
+        datePicker.setMinDate(System.currentTimeMillis() - 1000);
+        datePickerDialog.show();
     }
 
     public void onClickEndDate(View view) {
-        new DatePickerDialog(CreateTaskActivity.this, endDateListener,
+        final DatePickerDialog datePickerDialog = new DatePickerDialog(CreateTaskActivity.this, endDateListener,
                 currentDate.get(Calendar.YEAR), currentDate.get(Calendar.MONTH),
-                currentDate.get(Calendar.DAY_OF_MONTH)).show();
+                currentDate.get(Calendar.DAY_OF_MONTH));
+        DatePicker datePicker = datePickerDialog.getDatePicker();
+        datePicker.setMinDate(System.currentTimeMillis() - 1000);
+        datePickerDialog.show();
     }
 
     DatePickerDialog.OnDateSetListener startDateListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-            /*call StringBuilder once*/
             if (view.isShown()) {
                 StringBuilder builder = new StringBuilder();
                 builder.append(year);
@@ -172,7 +162,6 @@ public class CreateTaskActivity extends AppCompatActivity
                 mStartDateString = builder.toString();
                 startDateCalendar.set(year, month, dayOfMonth);
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//                String string = format.format(startDateCalendar.getTime());
                 textViewStartDate.setText(format.format(startDateCalendar.getTime()));
             }
         }
@@ -182,7 +171,6 @@ public class CreateTaskActivity extends AppCompatActivity
 
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-            /*call StringBuilder once*/
             if (view.isShown()) {
                 StringBuilder builder = new StringBuilder();
                 builder.append(year);
