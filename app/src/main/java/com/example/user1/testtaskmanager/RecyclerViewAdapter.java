@@ -23,10 +23,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private final static int MAX_PROGRESS_VALUE = 100;
 
-    private List<MyTask> mList = null;
+    private List<MyTask> list = null;
 
     public RecyclerViewAdapter(List<MyTask> arrayList) {
-        mList = arrayList;
+        list = arrayList;
     }
 
     @Override
@@ -39,14 +39,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        MyTask myTask = mList.get(position);
+        MyTask myTask = list.get(position);
         RecyclerTaskHolder recyclerTaskHolder = (RecyclerTaskHolder) holder;
         recyclerTaskHolder.taskTitle.setText(myTask.getmTaskName());
         recyclerTaskHolder.progressBarDate.setProgress(getDateProgressValue(myTask.getmStartDate(), myTask.getmEndDate()));
         recyclerTaskHolder.progressBarStage.setProgress(getStageProgressValue(myTask));
-        recyclerTaskHolder.checkBox.setChecked(mList.get(position).isChecked());
+        recyclerTaskHolder.checkBox.setChecked(list.get(position).isChecked());
     }
 
+    /*TODO check for refactor*/
     private int getDateProgressValue(Calendar calendarStart, Calendar calendarEnd) {
         long firstDate = calendarStart.getTimeInMillis();
         long lastDate = calendarEnd.getTimeInMillis();
@@ -64,6 +65,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
+    /*TODO check for refactor*/
     private int getStageProgressValue(MyTask myTask) {
         int doneCount = 0;
         int allCount = 0;
@@ -84,17 +86,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemCount() {
-        return mList.size();
+        return list.size();
     }
 
 
 
     public class RecyclerTaskHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        TextView taskTitle = null;
-        ProgressBar progressBarDate = null;
-        ProgressBar progressBarStage = null;
-        CheckBox checkBox = null;
+        private TextView taskTitle = null;
+        private ProgressBar progressBarDate = null;
+        private ProgressBar progressBarStage = null;
+        private CheckBox checkBox = null;
         private  Context context;
 
         public RecyclerTaskHolder(View itemView) {
@@ -108,10 +110,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
-                        mList.get(getPosition()).setChecked(true);
+                        list.get(getPosition()).setChecked(true);
                     }
                     else {
-                        mList.get(getPosition()).setChecked(false);
+                        list.get(getPosition()).setChecked(false);
                     }
                 }
             });
@@ -121,7 +123,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public void onClick(View v) {
             context = v.getContext();
             Intent intent = new Intent(context, ViewTaskActivity.class);
-            intent.putExtra(ViewTaskActivity.INTENT_EXTRA_TASK, mList.get(getPosition()));
+            intent.putExtra(ViewTaskActivity.INTENT_EXTRA_TASK, list.get(getPosition()));
             ((Activity)context).startActivityForResult(intent, MainActivity.REQUEST_CODE_VIEW_TASK);
         }
     }
