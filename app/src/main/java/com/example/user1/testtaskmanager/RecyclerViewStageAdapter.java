@@ -32,7 +32,6 @@ public class RecyclerViewStageAdapter extends RecyclerView.Adapter<RecyclerView.
         MyStage myStage = mStageList.get(position);
         RecyclerStageHolder recyclerStageHolder = (RecyclerStageHolder) holder;
         String string = String.valueOf(position + 1) + ". ";
-//        recyclerStageHolder.mStageNumber.setText(String.valueOf(position + 1));
         recyclerStageHolder.mStageNumber.setText(string);
         recyclerStageHolder.mStageTitle.setText(myStage.getmStageName());
     }
@@ -43,7 +42,6 @@ public class RecyclerViewStageAdapter extends RecyclerView.Adapter<RecyclerView.
     }
 
     class RecyclerStageHolder extends RecyclerView.ViewHolder{
-
         TextView mStageNumber = null;
         TextView mStageTitle = null;
         Button mStageDeleteButton = null;
@@ -53,7 +51,6 @@ public class RecyclerViewStageAdapter extends RecyclerView.Adapter<RecyclerView.
             mStageNumber = (TextView) itemView.findViewById(R.id.tv_ordinal_stage_number);
             mStageTitle = (TextView) itemView.findViewById(R.id.tv_stage_name);
             mStageDeleteButton = (Button) itemView.findViewById(R.id.btn_delete_stage);
-
             mStageDeleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
