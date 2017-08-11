@@ -1,51 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardView"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/colorBackgroundRecyclerViewItem"
-    android:layout_marginTop="4dp">
-    <LinearLayout
+    android:layout_height="40dp"
+    android:layout_marginBottom="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="@color/cardview_light_background">
+
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
         <CheckBox
             android:id="@+id/checkbox_id"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:buttonTint="@color/colorDarkText"/>
-    </LinearLayout>
-
-    <ProgressBar
-        android:id="@+id/circle_progress_id"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:indeterminate="false"
-        android:max="100"
-        android:rotation="-90"
-        android:progressDrawable="@drawable/circular"/>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:button="@drawable/checkbox_background"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="4dp"/>
+        <ProgressBar
+            android:id="@+id/circle_progress_id"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:indeterminate="false"
+            android:max="100"
+            android:rotation="-90"
+            android:progressDrawable="@drawable/circular"
+            android:layout_toRightOf="@id/checkbox_id"/>
         <TextView
             android:id="@+id/tv_title_of_recycler_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="@color/colorDarkText" />
+            android:textColor="@color/colorDarkText"
+            android:layout_toEndOf="@id/circle_progress_id"
+            />
         <ProgressBar
             android:id="@+id/horizontal_progress_id"
             android:layout_width="match_parent"
-            android:layout_height="8dp"
+            android:layout_height="10dp"
+            android:layout_marginRight="8dp"
             style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
             android:indeterminate="false"
+            android:layout_toEndOf="@id/circle_progress_id"
+            android:layout_alignParentBottom="true"
             />
-    </LinearLayout>
-
-
-</LinearLayout>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

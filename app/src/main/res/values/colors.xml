@@ -9,6 +9,7 @@
     <color name="colorButtonBack">#3F51B5</color>
     <color name="colorDarkText">#455A64</color>
     <color name="colorDateButton">#E65100</color>
-    <color name="colorBackgroundActivity">#EEEEEE</color>
+    <color name="colorBackgroundActivity">#F5F5F5</color>
+    <color name="colorBackgroundMainActivity">#F5F5F5</color>
     <color name="colorBackgroundRecyclerViewItem">#FFFFFF</color>
 </resources>

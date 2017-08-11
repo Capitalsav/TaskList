@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.user1.testtaskmanager.MainActivity"
-    android:background="@color/colorBackgroundActivity">
+    android:background="@color/colorBackgroundMainActivity"
+    android:padding="10dp">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/my_recycler_view"
