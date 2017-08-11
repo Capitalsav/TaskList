@@ -11,7 +11,6 @@ public class TaskManagerDbHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
 
-    /*constructor for class. param "context" - context of app*/
     public TaskManagerDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }

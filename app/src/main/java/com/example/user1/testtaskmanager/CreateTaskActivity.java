@@ -66,16 +66,16 @@ public class CreateTaskActivity extends AppCompatActivity
     /*TODO refactor this method*/
     public void onClickSaveTask(View view) {
         if (editText.getText().toString().equals("")){
-            Toast.makeText(this, "Please input task title", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.empty_task_name, Toast.LENGTH_SHORT).show();
         }
         else if (myStageList.size() == 0) {
-            Toast.makeText(this, "Please create 1 stage", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.empty_stage, Toast.LENGTH_SHORT).show();
         }
         else if (mStartDateString == null || mStartDateString.equals("")) {
-            Toast.makeText(this, "Please select start date", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.empty_start_date, Toast.LENGTH_SHORT).show();
         }
         else if (mEndDateString == null || mEndDateString.equals("")){
-            Toast.makeText(this, "Please select end date", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.empty_end_date, Toast.LENGTH_SHORT).show();
         }
         else {
             SQLiteDatabase database = taskManagerDbHelper.getWritableDatabase();
@@ -104,7 +104,7 @@ public class CreateTaskActivity extends AppCompatActivity
                         }
                         catch (Exception e) {
                             e.printStackTrace();
-                            /*TODO error message*/
+                            Toast.makeText(this, R.string.database_error, Toast.LENGTH_SHORT).show();
                         }
                     }
                 }

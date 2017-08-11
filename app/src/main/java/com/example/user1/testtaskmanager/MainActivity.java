@@ -26,13 +26,10 @@ public class MainActivity extends AppCompatActivity {
     private final static int REQUEST_CODE_NEW_TASK = 1;
 
     private TaskManagerDbHelper mTaskManagerDbHelper;
-
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-
     private ArrayList<MyTask> taskArrayList = new ArrayList<>();
-
     private AlarmManager alarmManager;
     private Calendar currentCalendar;
     private Calendar targetCalendar;

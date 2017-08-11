@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -23,9 +24,7 @@ public class ViewTaskActivity extends AppCompatActivity {
     private TextView textViewEndDate;
     private TextView textViewStageCount;
     private TextView textViewStageDescription;
-
     private MyTask myTask;
-
     private TaskManagerDbHelper taskManagerDbHelper;
 
 
@@ -56,6 +55,39 @@ public class ViewTaskActivity extends AppCompatActivity {
         finish();
     }
 
+    public void onClickStageDone(View view) {
+        ArrayList<MyStage> arrayList = myTask.getMyStages();
+        for (int i = 0; i < arrayList.size(); i++) {
+            if (arrayList.get(i).getIsStageDone() == MyStage.NOT_DONE){
+                if (setStageDoneDb(arrayList.get(i).getStageId()) >= 0) {
+                    arrayList.get(i).setIsStageDone(MyStage.DONE);
+                    setCurrentStage();
+                }
+                else {
+                    Toast.makeText(this, R.string.database_error, Toast.LENGTH_SHORT).show();
+                }
+                break;
+            }
+        }
+    }
+
+    public void onClickDeleteSingleTask(View view) {
+        if (deleteTask(myTask.getTaskId()) >= 0) {
+            Intent intent = new Intent();
+            setResult(RESULT_OK, intent);
+            finish();
+        }
+        else {
+            Toast.makeText(this, R.string.database_error, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void onClickBackFromViewTask(View view) {
+        Intent intent = new Intent();
+        setResult(RESULT_CANCELED, intent);
+        finish();
+    }
+
     private void setCurrentStage() {
         ArrayList<MyStage> stageArrayList = myTask.getMyStages();
         int allStagesCount = stageArrayList.size();
@@ -74,25 +106,7 @@ public class ViewTaskActivity extends AppCompatActivity {
         checkStagesDone();
     }
 
-    public void onClickStageDone(View view) {
-        Log.d("===============", "onCLickstageDone");
-        ArrayList<MyStage> arrayList = myTask.getMyStages();
-        for (int i = 0; i < arrayList.size(); i++) {
-            if (arrayList.get(i).getIsStageDone() == MyStage.NOT_DONE){
-                if (setStageDoneDb(arrayList.get(i).getStageId()) >= 0) {
-                    arrayList.get(i).setIsStageDone(MyStage.DONE);
-                    setCurrentStage();
-                }
-                else {
-                    Log.d("==============", "Error in database");
-                }
-                break;
-            }
-        }
-    }
-
     private int setStageDoneDb(int stageId) {
-        Log.d("=============StageId", String.valueOf(stageId));
         SQLiteDatabase database = taskManagerDbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(TaskManagerContract.StageInDb.COLUMN_STAGE_IS_DONE, MyStage.DONE);
@@ -109,7 +123,6 @@ public class ViewTaskActivity extends AppCompatActivity {
         finally {
             database.close();
         }
-        Log.d("===============", "updated " + rows);
         return rows;
     }
 
@@ -117,7 +130,8 @@ public class ViewTaskActivity extends AppCompatActivity {
         SQLiteDatabase database = taskManagerDbHelper.getWritableDatabase();
         int rows = -1;
         try {
-            rows = database.delete(TaskManagerContract.TaskInDb.TABLE_NAME, TaskManagerContract.TaskInDb._ID + "= ?", new String[]{String.valueOf(taskId)});
+            rows = database.delete(TaskManagerContract.TaskInDb.TABLE_NAME,
+                    TaskManagerContract.TaskInDb._ID + "= ?", new String[]{String.valueOf(taskId)});
         }
         catch (Exception e){
             e.printStackTrace();
@@ -129,18 +143,6 @@ public class ViewTaskActivity extends AppCompatActivity {
 
     }
 
-    public void onClickDeleteSingleTask(View view) {
-        if (deleteTask(myTask.getTaskId()) >= 0) {
-            Log.d("==============", "success");
-            Intent intent = new Intent();
-            setResult(RESULT_OK, intent);
-            finish();
-        }
-        else {
-            Log.d("================", "Error when delete");
-        }
-    }
-
     private void checkStagesDone() {
         ArrayList<MyStage> arrayList = myTask.getMyStages();
         int count = 0;
@@ -149,25 +151,15 @@ public class ViewTaskActivity extends AppCompatActivity {
                 count++;
             }
         }
-        int size = arrayList.size();
-        Log.d("===========ArrList.size", String.valueOf(size));
-        Log.d("========ArrList.count", String.valueOf(count));
         if (arrayList.size() == count){
             if (deleteTask(myTask.getTaskId()) >= 0) {
-                Log.d("==============", "success");
                 Intent intent = new Intent();
                 setResult(RESULT_OK, intent);
                 finish();
             }
             else {
-                Log.d("================", "Error when delete");
+                Toast.makeText(this, R.string.database_error, Toast.LENGTH_SHORT).show();
             }
         }
-    }
-
-    public void onClickBackFromViewTask(View view) {
-        Intent intent = new Intent();
-        setResult(RESULT_CANCELED, intent);
-        finish();
     }
 }

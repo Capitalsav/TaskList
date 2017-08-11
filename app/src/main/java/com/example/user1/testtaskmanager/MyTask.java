@@ -10,9 +10,6 @@ import java.util.GregorianCalendar;
 public class MyTask implements Serializable{
 
     private int taskId;
-
-
-
     private String mTaskName;
     private ArrayList<MyStage> myStages;
     private Calendar mStartDate;

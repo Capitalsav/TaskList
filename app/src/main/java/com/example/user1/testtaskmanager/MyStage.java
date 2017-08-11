@@ -9,7 +9,6 @@ public class MyStage implements Serializable{
     public final static int DONE = 1;
 
     private int stageId;
-
     private int isStageDone;
     private String mStageName;
 

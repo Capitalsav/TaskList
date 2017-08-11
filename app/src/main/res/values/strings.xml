@@ -6,7 +6,7 @@
     <string name="input_stage_name_title">Please enter stage</string>
     <string name="create_stage_button">Create stage</string>
     <string name="back_button">Back</string>
-    <string name="start_date_button">Start date</string>
+    <string name="start_date_button">Begin date</string>
     <string name="end_date_button">End date</string>
     <string name="select_start_date">Select start date</string>
     <string name="select_end_date">Select end date</string>
@@ -16,4 +16,9 @@
     <string name="end_date">End date:</string>
     <string name="stages_done">Stages done:</string>
     <string name="stage_description">Stage description:</string>
+    <string name="database_error">Database error. Try again.</string>
+    <string name="empty_stage">Please create one stage</string>
+    <string name="empty_start_date">Please select begin date</string>
+    <string name="empty_end_date">Please select end date</string>
+    <string name="empty_task_name">Please input task name</string>
 </resources>
