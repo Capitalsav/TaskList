@@ -6,8 +6,8 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical"
 tools:context="com.example.user1.testtaskmanager.MainActivity"
-    android:background="@color/colorBackgroundActivity">
-
+    android:background="@color/colorBackgroundActivity"
+    android:padding="10dp">
     <EditText
         android:id="@+id/edit_task_name"
         android:layout_width="match_parent"
@@ -22,50 +22,49 @@ tools:context="com.example.user1.testtaskmanager.MainActivity"
         android:layout_weight="1"
         android:scrollbars="vertical"
         android:padding="6dp"/>
-
     <Button
         android:id="@+id/btn_create_stage"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/create_stage_button"
         android:layout_gravity="center_horizontal"
         android:onClick="onClickCreateStage"
         android:background="@color/colorButtonCreate"
-        android:textColor="@color/colorWhiteText"/>
-    <TextView
-        android:id="@+id/tv_start_date"
-        android:layout_width="wrap_content"
+        android:textColor="@color/colorWhiteText"
+        android:layout_marginBottom="8dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorDarkText"
-        android:textSize="18sp"
-        android:text="@string/select_start_date"
-        android:layout_gravity="center_horizontal"/>
-    <Button
-        android:id="@+id/btn_start_date_dialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onClickStartDate"
-        android:text="@string/start_date_button"
-        android:layout_gravity="center"
-        android:background="@color/colorDateButton"
-        android:textColor="@color/colorWhiteText"/>
-    <TextView
-        android:id="@+id/tv_end_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorDarkText"
-        android:textSize="18sp"
-        android:text="@string/select_end_date"
-        android:layout_gravity="center_horizontal"/>
-    <Button
-        android:id="@+id/btn_end_date_dialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onClickEndDate"
-        android:text="@string/end_date_button"
-        android:layout_gravity="center"
-        android:background="@color/colorDateButton"
-        android:textColor="@color/colorWhiteText"/>
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp">
+        <Button
+            android:id="@+id/btn_start_date_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClickStartDate"
+            android:text="@string/start_date_button"
+            android:layout_gravity="center"
+            android:background="@color/colorDateButton"
+            android:textColor="@color/colorWhiteText"
+            android:layout_weight="1"
+            android:layout_marginRight="2dp"
+            android:foreground="?android:attr/selectableItemBackground"/>
+        <Button
+            android:id="@+id/btn_end_date_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClickEndDate"
+            android:text="@string/end_date_button"
+            android:layout_gravity="center"
+            android:background="@color/colorDateButton"
+            android:textColor="@color/colorWhiteText"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_weight="1"
+            android:layout_marginLeft="2dp"
+            android:foreground="?android:attr/selectableItemBackground"/>
+    </LinearLayout>
     <Button
         android:id="@+id/btn_save_task"
         android:layout_width="match_parent"
@@ -73,9 +72,6 @@ tools:context="com.example.user1.testtaskmanager.MainActivity"
         android:background="@color/colorButtonCreate"
         android:text="@string/save_task_button"
         android:textColor="@color/colorWhiteText"
-        android:onClick="onClickSaveTask"/>
-
-
-
-
+        android:onClick="onClickSaveTask"
+        android:clickable="true"/>
 </LinearLayout>

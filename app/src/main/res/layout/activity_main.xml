@@ -29,7 +29,8 @@
             android:background="@color/colorButtonDelete"
             android:textColor="@color/colorWhiteText"
             android:textSize="10pt"
-            android:onClick="onClickDeleteMultipleTask"/>
+            android:onClick="onClickDeleteMultipleTask"
+            android:layout_marginRight="2dp"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,7 +39,8 @@
             android:background="@color/colorButtonCreate"
             android:textColor="@color/colorWhiteText"
             android:textSize="10pt"
-            android:onClick="onClickCreateTask"/>
+            android:onClick="onClickCreateTask"
+            android:layout_marginLeft="2dp"/>
     </LinearLayout>
 
 

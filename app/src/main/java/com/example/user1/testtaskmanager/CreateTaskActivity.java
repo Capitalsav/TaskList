@@ -13,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -42,6 +43,8 @@ public class CreateTaskActivity extends AppCompatActivity
     private EditText editText;
     private TextView textViewStartDate;
     private TextView textViewEndDate;
+    private Button buttonStartDate;
+    private Button buttonEndDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +62,10 @@ public class CreateTaskActivity extends AppCompatActivity
         endDateCalendar = Calendar.getInstance();
         taskManagerDbHelper = new TaskManagerDbHelper(this);
         editText = (EditText) findViewById(R.id.edit_task_name);
-        textViewStartDate = (TextView) findViewById(R.id.tv_start_date);
-        textViewEndDate = (TextView) findViewById(R.id.tv_end_date);
+//        textViewStartDate = (TextView) findViewById(R.id.tv_start_date);
+//        textViewEndDate = (TextView) findViewById(R.id.tv_end_date);
+        buttonStartDate = (Button) findViewById(R.id.btn_start_date_dialog);
+        buttonEndDate = (Button) findViewById(R.id.btn_end_date_dialog);
     }
 
     /*TODO refactor this method*/
@@ -162,7 +167,8 @@ public class CreateTaskActivity extends AppCompatActivity
                 mStartDateString = builder.toString();
                 startDateCalendar.set(year, month, dayOfMonth);
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                textViewStartDate.setText(format.format(startDateCalendar.getTime()));
+//                textViewStartDate.setText(format.format(startDateCalendar.getTime()));
+                buttonStartDate.setText(format.format(startDateCalendar.getTime()));
             }
         }
     };
@@ -181,7 +187,8 @@ public class CreateTaskActivity extends AppCompatActivity
                 mEndDateString = builder.toString();
                 endDateCalendar.set(year, month, dayOfMonth);
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                textViewEndDate.setText(format.format(endDateCalendar.getTime()));
+//                textViewEndDate.setText(format.format(endDateCalendar.getTime()));
+                buttonEndDate.setText(format.format(endDateCalendar.getTime()));
             }
         }
     };
