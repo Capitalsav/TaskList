@@ -31,7 +31,8 @@
             android:max="100"
             android:rotation="-90"
             android:progressDrawable="@drawable/circular"
-            android:layout_toRightOf="@id/checkbox_id"/>
+            android:layout_toRightOf="@id/checkbox_id"
+            android:background="@drawable/circle_shape"/>
         <TextView
             android:id="@+id/tv_title_of_recycler_item"
             android:layout_width="wrap_content"
