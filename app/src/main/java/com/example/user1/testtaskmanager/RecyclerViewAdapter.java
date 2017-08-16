@@ -15,6 +15,8 @@ import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.mikhaellopez.circularprogressbar.CircularProgressBar;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -43,7 +45,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         RecyclerTaskHolder recyclerTaskHolder = (RecyclerTaskHolder) holder;
         recyclerTaskHolder.taskTitle.setText(myTask.getmTaskName());
         recyclerTaskHolder.progressBarDate.setProgress(getDateProgressValue(myTask.getmStartDate(), myTask.getmEndDate()));
-        recyclerTaskHolder.progressBarStage.setProgress(getStageProgressValue(myTask));
+        recyclerTaskHolder.progressBarStage.setProgressWithAnimation(getStageProgressValue(myTask));
         recyclerTaskHolder.checkBox.setChecked(list.get(position).isChecked());
     }
 
@@ -95,15 +97,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         private TextView taskTitle = null;
         private ProgressBar progressBarDate = null;
-        private ProgressBar progressBarStage = null;
+//        private ProgressBar progressBarStage = null;
         private CheckBox checkBox = null;
         private  Context context;
+        private CircularProgressBar progressBarStage;
 
         public RecyclerTaskHolder(View itemView) {
             super(itemView);
             taskTitle = (TextView) itemView.findViewById(R.id.tv_title_of_recycler_item);
             progressBarDate = (ProgressBar) itemView.findViewById(R.id.horizontal_progress_id);
-            progressBarStage = (ProgressBar) itemView.findViewById(R.id.circle_progress_id);
+//            progressBarStage = (ProgressBar) itemView.findViewById(R.id.circle_progress_id);
+            progressBarStage = (CircularProgressBar) itemView.findViewById(R.id.circle_progress_id);
             checkBox = (CheckBox) itemView.findViewById(R.id.checkbox_id);
             itemView.setOnClickListener(this);
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
