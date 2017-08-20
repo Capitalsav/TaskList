@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         targetCalendar.set(Calendar.HOUR, 8);
         targetCalendar.set(Calendar.MINUTE, 30);
         targetCalendar.set(Calendar.SECOND, 0);
+        targetCalendar.set(Calendar.AM_PM, Calendar.AM);
         selectAllTasks();
     }
 
