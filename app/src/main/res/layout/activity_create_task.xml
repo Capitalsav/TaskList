@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical"
-tools:context="com.example.user1.testtaskmanager.MainActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.user1.testtaskmanager.MainActivity"
     android:background="@color/colorBackgroundActivity"
     android:padding="10dp">
     <EditText
@@ -48,8 +48,7 @@ tools:context="com.example.user1.testtaskmanager.MainActivity"
             android:background="@color/colorDateButton"
             android:textColor="@color/colorWhiteText"
             android:layout_weight="1"
-            android:layout_marginRight="4dp"
-            android:foreground="?android:attr/selectableItemBackground"/>
+            android:layout_marginRight="4dp"/>
         <Button
             android:id="@+id/btn_end_date_dialog"
             android:layout_width="wrap_content"
@@ -59,11 +58,8 @@ tools:context="com.example.user1.testtaskmanager.MainActivity"
             android:layout_gravity="center"
             android:background="@color/colorDateButton"
             android:textColor="@color/colorWhiteText"
-            android:clickable="true"
-            android:focusable="true"
             android:layout_weight="1"
-            android:layout_marginLeft="4dp"
-            android:foreground="?android:attr/selectableItemBackground"/>
+            android:layout_marginLeft="4dp"/>
     </LinearLayout>
     <Button
         android:id="@+id/btn_save_task"
