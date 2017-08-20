@@ -8,40 +8,36 @@ public class MyStage implements Serializable{
     public final static int NOT_DONE = 0;
     public final static int DONE = 1;
 
-    private int stageId;
-    private int isStageDone;
+    private int mStageId;
+    private int mIsStageDone;
     private String mStageName;
 
     public MyStage(){
 
     }
 
-    public MyStage(int mStageNumber, String mStageName) {
-        this.isStageDone = mStageNumber;
-        this.mStageName = mStageName;
-    }
 
     public int getStageId() {
-        return stageId;
+        return mStageId;
     }
 
-    public void setStageId(int stageId) {
-        this.stageId = stageId;
+    public void setStageId(int mStageId) {
+        this.mStageId = mStageId;
     }
 
     public int getIsStageDone() {
-        return isStageDone;
+        return mIsStageDone;
     }
 
     public void setIsStageDone(int mStageNumber) {
-        this.isStageDone = mStageNumber;
+        this.mIsStageDone = mStageNumber;
     }
 
-    public String getmStageName() {
+    public String getStageName() {
         return mStageName;
     }
 
-    public void setmStageName(String mStageName) {
+    public void setStageName(String mStageName) {
         this.mStageName = mStageName;
     }
 }

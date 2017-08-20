@@ -1,15 +1,12 @@
 package com.example.user1.testtaskmanager;
 
-import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ProgressBar;
@@ -25,10 +22,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private final static int MAX_PROGRESS_VALUE = 100;
 
-    private List<MyTask> list = null;
+    private List<MyTask> mList = null;
 
     public RecyclerViewAdapter(List<MyTask> arrayList) {
-        list = arrayList;
+        mList = arrayList;
     }
 
     @Override
@@ -41,12 +38,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        MyTask myTask = list.get(position);
+        MyTask myTask = mList.get(position);
         RecyclerTaskHolder recyclerTaskHolder = (RecyclerTaskHolder) holder;
-        recyclerTaskHolder.taskTitle.setText(myTask.getmTaskName());
-        recyclerTaskHolder.progressBarDate.setProgress(getDateProgressValue(myTask.getmStartDate(), myTask.getmEndDate()));
+        recyclerTaskHolder.taskTitle.setText(myTask.getTaskName());
+        recyclerTaskHolder.progressBarDate.setProgress(getDateProgressValue(myTask.getStartDate(), myTask.getEndDate()));
         recyclerTaskHolder.progressBarStage.setProgressWithAnimation(getStageProgressValue(myTask));
-        recyclerTaskHolder.checkBox.setChecked(list.get(position).isChecked());
+        recyclerTaskHolder.checkBox.setChecked(mList.get(position).isChecked());
     }
 
     /*TODO check for refactor*/
@@ -88,7 +85,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return mList.size();
     }
 
 
@@ -97,7 +94,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         private TextView taskTitle = null;
         private ProgressBar progressBarDate = null;
-//        private ProgressBar progressBarStage = null;
         private CheckBox checkBox = null;
         private  Context context;
         private CircularProgressBar progressBarStage;
@@ -106,7 +102,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             super(itemView);
             taskTitle = (TextView) itemView.findViewById(R.id.tv_title_of_recycler_item);
             progressBarDate = (ProgressBar) itemView.findViewById(R.id.horizontal_progress_id);
-//            progressBarStage = (ProgressBar) itemView.findViewById(R.id.circle_progress_id);
             progressBarStage = (CircularProgressBar) itemView.findViewById(R.id.circle_progress_id);
             checkBox = (CheckBox) itemView.findViewById(R.id.checkbox_id);
             itemView.setOnClickListener(this);
@@ -114,10 +109,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
-                        list.get(getPosition()).setChecked(true);
+                        mList.get(getPosition()).setChecked(true);
                     }
                     else {
-                        list.get(getPosition()).setChecked(false);
+                        mList.get(getPosition()).setChecked(false);
                     }
                 }
             });
@@ -127,7 +122,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public void onClick(View v) {
             context = v.getContext();
             Intent intent = new Intent(context, ViewTaskActivity.class);
-            intent.putExtra(ViewTaskActivity.INTENT_EXTRA_TASK, list.get(getPosition()));
+            intent.putExtra(ViewTaskActivity.INTENT_EXTRA_TASK, mList.get(getPosition()));
             ((Activity)context).startActivityForResult(intent, MainActivity.REQUEST_CODE_VIEW_TASK);
         }
     }

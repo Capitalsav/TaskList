@@ -9,30 +9,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     public final static String INTENT_LIST_FOR_NOTIFICATION = "tasks for notification";
     public final static int REQUEST_CODE_VIEW_TASK = 2;
-    public final static String INTENT_RESULT_NEW_TASK = "new task";
-    private final static String TAG = "=================TAG: ";
     private final static int REQUEST_CODE_NEW_TASK = 1;
 
     private TaskManagerDbHelper mTaskManagerDbHelper;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ArrayList<MyTask> taskArrayList = new ArrayList<>();
-    private AlarmManager alarmManager;
-    private Calendar currentCalendar;
-    private Calendar targetCalendar;
+    private ArrayList<MyTask> mTaskArrayList = new ArrayList<>();
+    private AlarmManager mAlarmManager;
+    private Calendar mCurrentCalendar;
+    private Calendar mTargetCalendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,15 +38,15 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new RecyclerViewAdapter(taskArrayList);
+        mAdapter = new RecyclerViewAdapter(mTaskArrayList);
         mRecyclerView.setAdapter(mAdapter);
-        alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        currentCalendar = Calendar.getInstance();
-        targetCalendar = Calendar.getInstance();
-        targetCalendar.set(Calendar.HOUR, 8);
-        targetCalendar.set(Calendar.MINUTE, 30);
-        targetCalendar.set(Calendar.SECOND, 0);
-        targetCalendar.set(Calendar.AM_PM, Calendar.AM);
+        mAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        mCurrentCalendar = Calendar.getInstance();
+        mTargetCalendar = Calendar.getInstance();
+        mTargetCalendar.set(Calendar.HOUR, 8);
+        mTargetCalendar.set(Calendar.MINUTE, 30);
+        mTargetCalendar.set(Calendar.SECOND, 0);
+        mTargetCalendar.set(Calendar.AM_PM, Calendar.AM);
         selectAllTasks();
     }
 
@@ -68,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        taskArrayList.clear();
+        mTaskArrayList.clear();
         mAdapter.notifyDataSetChanged();
         selectAllTasks();
         mAdapter.notifyDataSetChanged();
@@ -135,18 +130,18 @@ public class MainActivity extends AppCompatActivity {
                 while (cursorStage.moveToNext()) {
                     MyStage myStage = new MyStage();
                     myStage.setStageId(cursorStage.getInt(idStageColumnIndex));
-                    myStage.setmStageName(cursorStage.getString(nameStageColumnIndex));
+                    myStage.setStageName(cursorStage.getString(nameStageColumnIndex));
                     myStage.setIsStageDone(cursorStage.getInt(isDoneStageColumnIndex));
                     stageArrayList.add(myStage);
                 }
                 MyTask myTask = new MyTask();
                 myTask.setTaskId(currentId);
-                myTask.setmTaskName(taskName);
+                myTask.setTaskName(taskName);
                 myTask.setMyStages(stageArrayList);
-                myTask.setmStartDate(getCalendarFromString(startDateString));
-                myTask.setmEndDate(getCalendarFromString(endDateString));
+                myTask.setStartDate(getCalendarFromString(startDateString));
+                myTask.setEndDate(getCalendarFromString(endDateString));
                 myTask.setChecked(false);//default set false for isChecked
-                taskArrayList.add(myTask);
+                mTaskArrayList.add(myTask);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -172,10 +167,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickDeleteMultipleTask(View view) {
-        for (int i = taskArrayList.size() - 1; i >= 0; i--) {
-            if (taskArrayList.get(i).isChecked()) {
-                if (deleteTask(taskArrayList.get(i).getTaskId()) >= 0) {
-                    taskArrayList.remove(taskArrayList.get(i));
+        for (int i = mTaskArrayList.size() - 1; i >= 0; i--) {
+            if (mTaskArrayList.get(i).isChecked()) {
+                if (deleteTask(mTaskArrayList.get(i).getTaskId()) >= 0) {
+                    mTaskArrayList.remove(mTaskArrayList.get(i));
                     mAdapter.notifyDataSetChanged();
                 } else {
                     /*TODO notification for user if error occurred*/
@@ -198,22 +193,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUserNotifications() {
-        long targetTime = targetCalendar.getTimeInMillis();
-        long currentTime = currentCalendar.getTimeInMillis();
+        long targetTime = mTargetCalendar.getTimeInMillis();
+        long currentTime = mCurrentCalendar.getTimeInMillis();
         ArrayList<String> arrayList = new ArrayList<>();
-        for (int i = 0; i < taskArrayList.size(); i++) {
-            arrayList.add(taskArrayList.get(i).getmTaskName());
+        for (int i = 0; i < mTaskArrayList.size(); i++) {
+            arrayList.add(mTaskArrayList.get(i).getTaskName());
         }
         Intent intent = new Intent(this, MyScheduledReceiver.class);
         intent.putStringArrayListExtra(INTENT_LIST_FOR_NOTIFICATION, arrayList);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
         if (currentTime >= targetTime) {
-            targetCalendar.add(Calendar.DAY_OF_MONTH, 1);
-            targetTime = targetCalendar.getTimeInMillis();
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, targetTime, AlarmManager.INTERVAL_DAY, pendingIntent);
+            mTargetCalendar.add(Calendar.DAY_OF_MONTH, 1);
+            targetTime = mTargetCalendar.getTimeInMillis();
+            mAlarmManager.setRepeating(AlarmManager.RTC_WAKEUP, targetTime, AlarmManager.INTERVAL_DAY, pendingIntent);
         }
         else {
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, targetTime, AlarmManager.INTERVAL_DAY, pendingIntent);
+            mAlarmManager.setRepeating(AlarmManager.RTC_WAKEUP, targetTime, AlarmManager.INTERVAL_DAY, pendingIntent);
         }
     }
 }

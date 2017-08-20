@@ -5,12 +5,9 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,31 +16,31 @@ public class ViewTaskActivity extends AppCompatActivity {
 
     public final static String INTENT_EXTRA_TASK = "task_intent";
 
-    private TextView textViewTitle;
-    private TextView textViewStartDate;
-    private TextView textViewEndDate;
-    private TextView textViewStageCount;
-    private TextView textViewStageDescription;
-    private MyTask myTask;
-    private TaskManagerDbHelper taskManagerDbHelper;
+    private TextView mTextViewTitle;
+    private TextView mTextViewStartDate;
+    private TextView mTextViewEndDate;
+    private TextView mTextViewStageCount;
+    private TextView mTextViewStageDescription;
+    private MyTask mMyTask;
+    private TaskManagerDbHelper mTaskManagerDbHelper;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_task);
-        textViewTitle = (TextView) findViewById(R.id.tv_task_title_view);
-        textViewStartDate = (TextView) findViewById(R.id.tv_start_date_view);
-        textViewEndDate = (TextView) findViewById(R.id.tv_end_date_view);
-        textViewStageCount = (TextView) findViewById(R.id.tv_stages_count_view);
-        textViewStageDescription = (TextView) findViewById(R.id.tv_stages_description);
+        mTextViewTitle = (TextView) findViewById(R.id.tv_task_title_view);
+        mTextViewStartDate = (TextView) findViewById(R.id.tv_start_date_view);
+        mTextViewEndDate = (TextView) findViewById(R.id.tv_end_date_view);
+        mTextViewStageCount = (TextView) findViewById(R.id.tv_stages_count_view);
+        mTextViewStageDescription = (TextView) findViewById(R.id.tv_stages_description);
         Intent intent = getIntent();
-        myTask = (MyTask) intent.getSerializableExtra(INTENT_EXTRA_TASK);
+        mMyTask = (MyTask) intent.getSerializableExtra(INTENT_EXTRA_TASK);
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        textViewTitle.setText(myTask.getmTaskName());
-        textViewStartDate.setText(format.format(myTask.getmStartDate().getTime()));
-        textViewEndDate.setText(format.format(myTask.getmEndDate().getTime()));
-        taskManagerDbHelper = new TaskManagerDbHelper(this);
+        mTextViewTitle.setText(mMyTask.getTaskName());
+        mTextViewStartDate.setText(format.format(mMyTask.getStartDate().getTime()));
+        mTextViewEndDate.setText(format.format(mMyTask.getEndDate().getTime()));
+        mTaskManagerDbHelper = new TaskManagerDbHelper(this);
         setCurrentStage();
     }
 
@@ -56,7 +53,7 @@ public class ViewTaskActivity extends AppCompatActivity {
     }
 
     public void onClickStageDone(View view) {
-        ArrayList<MyStage> arrayList = myTask.getMyStages();
+        ArrayList<MyStage> arrayList = mMyTask.getMyStages();
         for (int i = 0; i < arrayList.size(); i++) {
             if (arrayList.get(i).getIsStageDone() == MyStage.NOT_DONE){
                 if (setStageDoneDb(arrayList.get(i).getStageId()) >= 0) {
@@ -72,7 +69,7 @@ public class ViewTaskActivity extends AppCompatActivity {
     }
 
     public void onClickDeleteSingleTask(View view) {
-        if (deleteTask(myTask.getTaskId()) >= 0) {
+        if (deleteTask(mMyTask.getTaskId()) >= 0) {
             Intent intent = new Intent();
             setResult(RESULT_OK, intent);
             finish();
@@ -89,7 +86,7 @@ public class ViewTaskActivity extends AppCompatActivity {
     }
 
     private void setCurrentStage() {
-        ArrayList<MyStage> stageArrayList = myTask.getMyStages();
+        ArrayList<MyStage> stageArrayList = mMyTask.getMyStages();
         int allStagesCount = stageArrayList.size();
         int stageDone = 0;
         for (int i = 0; i < stageArrayList.size(); i++) {
@@ -97,9 +94,9 @@ public class ViewTaskActivity extends AppCompatActivity {
                 stageDone++;
             }
             else if (stageArrayList.get(i).getIsStageDone() == MyStage.NOT_DONE) {
-                textViewStageDescription.setText(stageArrayList.get(i).getmStageName());
+                mTextViewStageDescription.setText(stageArrayList.get(i).getStageName());
                 String stageDescription = stageDone + "/" + allStagesCount;
-                textViewStageCount.setText(stageDescription);
+                mTextViewStageCount.setText(stageDescription);
                 break;
             }
         }
@@ -107,7 +104,7 @@ public class ViewTaskActivity extends AppCompatActivity {
     }
 
     private int setStageDoneDb(int stageId) {
-        SQLiteDatabase database = taskManagerDbHelper.getWritableDatabase();
+        SQLiteDatabase database = mTaskManagerDbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(TaskManagerContract.StageInDb.COLUMN_STAGE_IS_DONE, MyStage.DONE);
         String[] whereValues = {String.valueOf(stageId)};
@@ -127,7 +124,7 @@ public class ViewTaskActivity extends AppCompatActivity {
     }
 
     private int deleteTask(int taskId) {
-        SQLiteDatabase database = taskManagerDbHelper.getWritableDatabase();
+        SQLiteDatabase database = mTaskManagerDbHelper.getWritableDatabase();
         int rows = -1;
         try {
             rows = database.delete(TaskManagerContract.TaskInDb.TABLE_NAME,
@@ -144,7 +141,7 @@ public class ViewTaskActivity extends AppCompatActivity {
     }
 
     private void checkStagesDone() {
-        ArrayList<MyStage> arrayList = myTask.getMyStages();
+        ArrayList<MyStage> arrayList = mMyTask.getMyStages();
         int count = 0;
         for (MyStage stage : arrayList){
             if (stage.getIsStageDone() == MyStage.DONE) {
@@ -152,7 +149,7 @@ public class ViewTaskActivity extends AppCompatActivity {
             }
         }
         if (arrayList.size() == count){
-            if (deleteTask(myTask.getTaskId()) >= 0) {
+            if (deleteTask(mMyTask.getTaskId()) >= 0) {
                 Intent intent = new Intent();
                 setResult(RESULT_OK, intent);
                 finish();

@@ -4,12 +4,11 @@ package com.example.user1.testtaskmanager;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 
 public class MyTask implements Serializable{
 
-    private int taskId;
+    private int mTaskId;
     private String mTaskName;
     private ArrayList<MyStage> myStages;
     private Calendar mStartDate;
@@ -21,18 +20,11 @@ public class MyTask implements Serializable{
 
     }
 
-    public MyTask(String mTaskName, ArrayList<MyStage> myStages, Calendar mStartDate, Calendar mEndDate) {
-        this.mTaskName = mTaskName;
-        this.myStages = myStages;
-        this.mStartDate = mStartDate;
-        this.mEndDate = mEndDate;
-    }
-
-    public String getmTaskName() {
+    public String getTaskName() {
         return mTaskName;
     }
 
-    public void setmTaskName(String mTaskName) {
+    public void setTaskName(String mTaskName) {
         this.mTaskName = mTaskName;
     }
 
@@ -44,28 +36,28 @@ public class MyTask implements Serializable{
         this.myStages = myStages;
     }
 
-    public Calendar getmStartDate() {
+    public Calendar getStartDate() {
         return mStartDate;
     }
 
-    public void setmStartDate(Calendar mStartDate) {
+    public void setStartDate(Calendar mStartDate) {
         this.mStartDate = mStartDate;
     }
 
-    public Calendar getmEndDate() {
+    public Calendar getEndDate() {
         return mEndDate;
     }
 
-    public void setmEndDate(Calendar mEndDate) {
+    public void setEndDate(Calendar mEndDate) {
         this.mEndDate = mEndDate;
     }
 
     public int getTaskId() {
-        return taskId;
+        return mTaskId;
     }
 
-    public void setTaskId(int taskId) {
-        this.taskId = taskId;
+    public void setTaskId(int mtaskId) {
+        this.mTaskId = mtaskId;
     }
 
     public boolean isChecked() {
