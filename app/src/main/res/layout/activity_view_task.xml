@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.user1.testtaskmanager.MainActivity"
-    android:background="@color/colorBackgroundActivity">
+    android:background="@color/colorBackgroundActivity"
+    android:padding="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,16 +19,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorDarkText"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:layout_gravity="center_horizontal"
-            android:text="@string/task_title"/>
+            android:text="@string/task_title"
+            android:textStyle="italic"/>
         <TextView
             android:id="@+id/tv_task_title_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorDarkText"
-            android:textSize="28sp"
-            android:layout_gravity="center_horizontal"/>
+            android:textSize="30sp"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"/>
     </LinearLayout>
 
     <TableLayout
@@ -38,62 +42,44 @@
         <TableRow
             android:minHeight="40dp">
             <TextView
+                style="@style/ViewTaskInfoText"
                 android:id="@+id/tv_start_date_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorDarkText"
-                android:textSize="24sp"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/start_date"
-                android:layout_weight="1"/>
+                android:text="@string/start_date" />
             <TextView
+                style="@style/ViewTaskInfoText"
                 android:id="@+id/tv_start_date_view"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorDarkText"
-                android:textSize="24sp"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"/>
+                android:layout_height="wrap_content" />
         </TableRow>
         <TableRow
             android:minHeight="40dp">
             <TextView
+                style="@style/ViewTaskInfoText"
                 android:id="@+id/tv_end_date_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorDarkText"
-                android:textSize="24sp"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/end_date"
-                android:layout_weight="1"/>
+                android:text="@string/end_date" />
             <TextView
+                style="@style/ViewTaskInfoText"
                 android:id="@+id/tv_end_date_view"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="@color/colorDarkText"
-                android:textSize="24sp"
-                android:layout_gravity="center_horizontal"/>
+                android:layout_height="wrap_content" />
         </TableRow>
         <TableRow
             android:minHeight="40dp">
             <TextView
+                style="@style/ViewTaskInfoText"
                 android:id="@+id/tv_stage_done_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorDarkText"
-                android:textSize="24sp"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/stages_done"
-                android:layout_weight="1"/>
+                android:text="@string/stages_done" />
             <TextView
+                style="@style/ViewTaskInfoText"
                 android:id="@+id/tv_stages_count_view"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="@color/colorDarkText"
-                android:textSize="24sp"
-                android:layout_gravity="center_horizontal"/>
+                android:layout_height="wrap_content" />
         </TableRow>
     </TableLayout>
 
@@ -106,7 +92,8 @@
         android:layout_gravity="center_horizontal"
         android:background="@color/colorButtonCreate"
         android:text="@string/stage_done_button"
-        android:textColor="@color/colorWhiteText"/>
+        android:textColor="@color/colorWhiteText"
+        android:padding="8dp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -117,17 +104,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorDarkText"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:layout_gravity="center_horizontal"
-            android:text="@string/stage_description" />
+            android:text="@string/stage_description"
+            android:fontFamily="sans-serif"
+            android:textStyle="italic"/>
         <TextView
             android:id="@+id/tv_stages_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="@color/colorDarkText"
-            android:textSize="28sp"
-            android:layout_gravity="center_horizontal"/>
+            android:textSize="30sp"
+            android:layout_gravity="center_horizontal"
+            android:textStyle="bold"/>
     </LinearLayout>
 
 
@@ -143,7 +133,8 @@
             android:background="@color/colorButtonBack"
             android:textColor="@color/colorWhiteText"
             android:textSize="10pt"
-            android:onClick="onClickBackFromViewTask"/>
+            android:onClick="onClickBackFromViewTask"
+            android:layout_marginRight="2dp"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -152,7 +143,8 @@
             android:background="@color/colorButtonDelete"
             android:textColor="@color/colorWhiteText"
             android:textSize="10pt"
-            android:onClick="onClickDeleteSingleTask"/>
+            android:onClick="onClickDeleteSingleTask"
+            android:layout_marginLeft="2dp"/>
     </LinearLayout>
 </LinearLayout>
 
