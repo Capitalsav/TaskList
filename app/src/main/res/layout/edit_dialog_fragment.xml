@@ -15,6 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/colorDarkText"
-        android:maxLength="15"/>
+        android:maxLength="18"/>
 
 </LinearLayout>
