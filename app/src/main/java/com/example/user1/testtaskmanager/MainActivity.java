@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /*TODO refactor this method*/
     private void selectAllTasks() {
         SQLiteDatabase database = mTaskManagerDbHelper.getReadableDatabase();
         String[] selection = {
@@ -176,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
                     mTaskArrayList.remove(mTaskArrayList.get(i));
                     mAdapter.notifyDataSetChanged();
                 } else {
-                    /*TODO notification for user if error occurred*/
+                    Toast.makeText(this, R.string.database_error, Toast.LENGTH_SHORT).show();
                 }
             }
         }

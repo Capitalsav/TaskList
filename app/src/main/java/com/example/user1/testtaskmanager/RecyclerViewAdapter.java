@@ -46,7 +46,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         recyclerTaskHolder.checkBox.setChecked(mList.get(position).isChecked());
     }
 
-    /*TODO check for refactor*/
     private int getDateProgressValue(Calendar calendarStart, Calendar calendarEnd) {
         long firstDate = calendarStart.getTimeInMillis();
         long lastDate = calendarEnd.getTimeInMillis();
@@ -64,7 +63,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
-    /*TODO check for refactor*/
     private int getStageProgressValue(MyTask myTask) {
         int doneCount = 0;
         int allCount = 0;
@@ -95,7 +93,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         private TextView taskTitle = null;
         private ProgressBar progressBarDate = null;
         private CheckBox checkBox = null;
-        private  Context context;
+        private Context context;
         private CircularProgressBar progressBarStage;
 
         public RecyclerTaskHolder(View itemView) {
