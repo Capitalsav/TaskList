@@ -58,7 +58,6 @@ public class CreateTaskActivity extends AppCompatActivity
         mButtonEndDate = (Button) findViewById(R.id.btn_end_date_dialog);
     }
 
-    /*TODO refactor this method*/
     public void onClickSaveTask(View view) {
         if (mEditText.getText().toString().equals("")){
             Toast.makeText(this, R.string.empty_task_name, Toast.LENGTH_SHORT).show();
@@ -73,48 +72,7 @@ public class CreateTaskActivity extends AppCompatActivity
             Toast.makeText(this, R.string.empty_end_date, Toast.LENGTH_SHORT).show();
         }
         else {
-            SQLiteDatabase database = mTaskManagerDbHelper.getWritableDatabase();
-            try {
-
-                ContentValues contentValues = new ContentValues();
-                contentValues.put(TaskManagerContract.TaskInDb.COLUMN_TASK_NAME, mEditText.getText().toString());
-                contentValues.put(TaskManagerContract.TaskInDb.COLUMN_TASK_START_DATE, mStartDateString);
-                contentValues.put(TaskManagerContract.TaskInDb.COLUMN_TASK_END_DATE, mEndDateString);
-                long newRowId = database.insert(TaskManagerContract.TaskInDb.TABLE_NAME, null, contentValues);
-                if (newRowId != -1) {
-                    for (int i = 0; i < mMyStageList.size(); i++) {
-                        MyStage stage = mMyStageList.get(i);
-                        ContentValues contentValuesStage = new ContentValues();
-                        contentValuesStage.put(TaskManagerContract.StageInDb.COLUMN_STAGE_NAME, stage.getStageName());
-                        contentValuesStage.put(TaskManagerContract.StageInDb.COLUMN_STAGE_IS_DONE, MyStage.NOT_DONE);
-                        contentValuesStage.put(TaskManagerContract.StageInDb.COLUMN_STAGE_TASK_ID, newRowId);
-                        try {
-                            long newRowIdStage = database.insert(TaskManagerContract.StageInDb.TABLE_NAME, null, contentValuesStage);
-                            if (newRowIdStage != -1) {
-                                /*TODO success result*/
-                            }
-                            else {
-                                /*TODO error message*/
-                            }
-                        }
-                        catch (Exception e) {
-                            e.printStackTrace();
-                            Toast.makeText(this, R.string.database_error, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-                else {
-                    /*TODO show error toast*/
-                }
-            }catch (Exception e) {
-                e.printStackTrace();
-            }
-            finally {
-                database.close();
-            }
-            Intent intent = new Intent();
-            setResult(RESULT_OK, intent);
-            finish();
+            createTaskInDatabase();
         }
     }
 
@@ -195,6 +153,52 @@ public class CreateTaskActivity extends AppCompatActivity
         myStage.setStageName(editText.getText().toString());
         mMyStageList.add(myStage);
         mAdapter.notifyDataSetChanged();
+    }
+
+    private void createTaskInDatabase() {
+        SQLiteDatabase database = mTaskManagerDbHelper.getWritableDatabase();
+        try {
+
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(TaskManagerContract.TaskInDb.COLUMN_TASK_NAME, mEditText.getText().toString());
+            contentValues.put(TaskManagerContract.TaskInDb.COLUMN_TASK_START_DATE, mStartDateString);
+            contentValues.put(TaskManagerContract.TaskInDb.COLUMN_TASK_END_DATE, mEndDateString);
+            long newRowId = database.insert(TaskManagerContract.TaskInDb.TABLE_NAME, null, contentValues);
+            if (newRowId != -1) {
+                for (int i = 0; i < mMyStageList.size(); i++) {
+                    MyStage stage = mMyStageList.get(i);
+                    ContentValues contentValuesStage = new ContentValues();
+                    contentValuesStage.put(TaskManagerContract.StageInDb.COLUMN_STAGE_NAME, stage.getStageName());
+                    contentValuesStage.put(TaskManagerContract.StageInDb.COLUMN_STAGE_IS_DONE, MyStage.NOT_DONE);
+                    contentValuesStage.put(TaskManagerContract.StageInDb.COLUMN_STAGE_TASK_ID, newRowId);
+                    try {
+                        long newRowIdStage = database.insert(TaskManagerContract.StageInDb.TABLE_NAME, null, contentValuesStage);
+                        if (newRowIdStage != -1) {
+
+                        }
+                        else {
+                            Toast.makeText(this, R.string.database_error, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                        Toast.makeText(this, R.string.database_error, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+            else {
+                Toast.makeText(this, R.string.database_error, Toast.LENGTH_SHORT).show();
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, R.string.database_error, Toast.LENGTH_SHORT).show();
+        }
+        finally {
+            database.close();
+        }
+        Intent intent = new Intent();
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
 }
