@@ -64,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         mTaskArrayList.clear();
-        mAdapter.notifyDataSetChanged();
         selectAllTasks();
         mAdapter.notifyDataSetChanged();
 
