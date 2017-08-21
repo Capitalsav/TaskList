@@ -15,7 +15,6 @@
         android:id="@+id/edit_text_stage_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorDarkText"
-        android:maxLength="18"/>
+        android:textColor="@color/colorDarkText"/>
 
 </LinearLayout>

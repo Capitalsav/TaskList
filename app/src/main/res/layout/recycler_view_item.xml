@@ -38,7 +38,8 @@
             android:textSize="20sp"
             android:textColor="@color/colorDarkText"
             android:layout_toEndOf="@id/circle_progress_id"
-            />
+            android:maxLines="1"
+            android:ellipsize="end"/>
         <ProgressBar
             android:id="@+id/horizontal_progress_id"
             android:layout_width="match_parent"
