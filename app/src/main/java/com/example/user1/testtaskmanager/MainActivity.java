@@ -10,13 +10,18 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
     public final static String INTENT_LIST_FOR_NOTIFICATION = "tasks for notification";
+    public final static String DATE_PARSE_ERROR = "Date parse error.";
     public final static int REQUEST_CODE_VIEW_TASK = 2;
     private final static int REQUEST_CODE_NEW_TASK = 1;
 
@@ -151,17 +156,16 @@ public class MainActivity extends AppCompatActivity {
         setUserNotifications();
     }
 
-    /*TODO refactor this method*/
     private Calendar getCalendarFromString(String string) {
-        int firstLineIndexOf = string.indexOf("-");
-        int lastLineIndexOf = string.lastIndexOf("-");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Calendar calendar = Calendar.getInstance();
-        int year = Integer.parseInt(string.substring(0, firstLineIndexOf));
-        int month = Integer.parseInt(string.substring(firstLineIndexOf + 1, lastLineIndexOf));
-        int day = Integer.parseInt(string.substring(lastLineIndexOf + 1, string.length()));
-        calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, month);
-        calendar.set(Calendar.DAY_OF_MONTH, day);
+        try {
+            calendar.setTime(dateFormat.parse(string));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            Toast.makeText(this, DATE_PARSE_ERROR, Toast.LENGTH_SHORT).show();
+        }
+        calendar.add(Calendar.MONTH, 1);
         return calendar;
     }
 
