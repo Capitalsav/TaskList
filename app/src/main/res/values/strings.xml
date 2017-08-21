@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TestTaskManager</string>
+    <string name="app_name">Task List</string>
     <string name="create_button">Create</string>
     <string name="delete_button">Delete</string>
     <string name="save_task_button">Save</string>
