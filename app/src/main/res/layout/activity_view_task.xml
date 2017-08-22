@@ -98,7 +98,8 @@
         android:background="@color/colorButtonCreate"
         android:text="@string/stage_done_button"
         android:textColor="@color/colorWhiteText"
-        android:padding="8dp"/>
+        android:padding="8dp"
+        android:fontFamily="sans-serif-light"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -144,7 +145,8 @@
             android:textColor="@color/colorWhiteText"
             android:textSize="10pt"
             android:onClick="onClickBackFromViewTask"
-            android:layout_marginRight="2dp"/>
+            android:layout_marginRight="2dp"
+            android:fontFamily="sans-serif-light"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -154,7 +156,8 @@
             android:textColor="@color/colorWhiteText"
             android:textSize="10pt"
             android:onClick="onClickDeleteSingleTask"
-            android:layout_marginLeft="2dp"/>
+            android:layout_marginLeft="2dp"
+            android:fontFamily="sans-serif-light"/>
     </LinearLayout>
 </LinearLayout>
 
