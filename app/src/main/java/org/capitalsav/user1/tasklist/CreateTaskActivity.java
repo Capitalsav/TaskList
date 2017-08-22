@@ -1,4 +1,4 @@
-package com.example.user1.testtaskmanager;
+package org.capitalsav.user1.tasklist;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.user1.tasklist.R;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

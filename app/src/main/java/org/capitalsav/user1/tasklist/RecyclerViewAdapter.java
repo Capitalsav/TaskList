@@ -1,4 +1,4 @@
-package com.example.user1.testtaskmanager;
+package org.capitalsav.user1.tasklist;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,6 +12,7 @@ import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.user1.tasklist.R;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 import java.util.ArrayList;

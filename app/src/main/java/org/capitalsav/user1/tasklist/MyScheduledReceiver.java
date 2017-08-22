@@ -1,4 +1,4 @@
-package com.example.user1.testtaskmanager;
+package org.capitalsav.user1.tasklist;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -6,6 +6,8 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+
+import com.example.user1.tasklist.R;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.example.user1.testtaskmanager;
+package org.capitalsav.user1.tasklist;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.user1.testtaskmanager">
+    package="com.example.user1.tasklist">
 
     <application
         android:allowBackup="true"
@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
+        <activity android:name="org.capitalsav.user1.tasklist.MainActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -18,16 +18,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CreateTaskActivity"
+        <activity android:name="org.capitalsav.user1.tasklist.CreateTaskActivity"
             android:windowSoftInputMode="adjustPan"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ViewTaskActivity"
+        <activity android:name="org.capitalsav.user1.tasklist.ViewTaskActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:screenOrientation="portrait"></activity>
 
         <receiver
-            android:name=".MyScheduledReceiver"
+            android:name="org.capitalsav.user1.tasklist.MyScheduledReceiver"
             android:enabled="true"
             android:exported="true"></receiver>
     </application>

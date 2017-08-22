@@ -1,4 +1,4 @@
-package com.example.user1.testtaskmanager;
+package org.capitalsav.user1.tasklist;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -11,6 +11,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
+
+import com.example.user1.tasklist.R;
 
 import java.text.DateFormat;
 import java.text.ParseException;

@@ -1,4 +1,4 @@
-package com.example.user1.testtaskmanager;
+package org.capitalsav.user1.tasklist;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
