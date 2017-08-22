@@ -93,7 +93,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onClickStageDone"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:layout_gravity="center_horizontal"
         android:background="@color/colorButtonCreate"
         android:text="@string/stage_done_button"
@@ -143,7 +143,7 @@
             android:layout_weight="1"
             android:background="@color/colorButtonBack"
             android:textColor="@color/colorWhiteText"
-            android:textSize="10pt"
+            android:textSize="18sp"
             android:onClick="onClickBackFromViewTask"
             android:layout_marginRight="2dp"
             android:fontFamily="sans-serif-light"/>
@@ -154,7 +154,7 @@
             android:layout_weight="1"
             android:background="@color/colorButtonDelete"
             android:textColor="@color/colorWhiteText"
-            android:textSize="10pt"
+            android:textSize="18sp"
             android:onClick="onClickDeleteSingleTask"
             android:layout_marginLeft="2dp"
             android:fontFamily="sans-serif-light"/>
