@@ -10,7 +10,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/input_stage_name_title"
-        android:textColor="@color/colorDarkText"/>
+        android:textColor="@color/colorDarkText"
+        android:fontFamily="sans-serif-light"/>
 
     <EditText
         android:id="@+id/edit_text_stage_name"
