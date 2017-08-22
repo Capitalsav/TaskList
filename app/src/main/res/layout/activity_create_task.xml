@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.user1.tasklist.org.example.user1.tasklist.MainActivity"
+
     android:background="@color/colorBackgroundActivity"
     android:padding="10dp">
     <EditText
@@ -14,7 +14,8 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorDarkText"
         android:fontFamily="sans-serif-light"
-        android:maxLines="1"/>
+        android:maxLines="1"
+        android:inputType="text"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/my_recycler_view_stages"
