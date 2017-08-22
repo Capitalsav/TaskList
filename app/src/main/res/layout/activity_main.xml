@@ -28,7 +28,8 @@
             android:layout_weight="1"
             android:background="@color/colorButtonDelete"
             android:textColor="@color/colorWhiteText"
-            android:textSize="10pt"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-light"
             android:onClick="onClickDeleteMultipleTask"
             android:layout_marginRight="2dp"/>
         <Button
@@ -38,7 +39,8 @@
             android:layout_weight="1"
             android:background="@color/colorButtonCreate"
             android:textColor="@color/colorWhiteText"
-            android:textSize="10pt"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-light"
             android:onClick="onClickCreateTask"
             android:layout_marginLeft="2dp"/>
     </LinearLayout>
