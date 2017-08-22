@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Список задач</string>
+    <string name="create_button">Создать</string>
+    <string name="delete_button">Удалить</string>
+    <string name="save_task_button">Сохранить</string>
+    <string name="input_stage_name_title">Пожалуйса введите подзадачу</string>
+    <string name="create_stage_button">Создать подзадачу</string>
+    <string name="back_button">Назад</string>
+    <string name="start_date_button">Начало</string>
+    <string name="end_date_button">Завершение</string>
+    <string name="select_start_date">Выберите дату начала</string>
+    <string name="select_end_date">Выберите дату завершения</string>
+    <string name="stage_done_button">Подзадача выполнена</string>
+    <string name="task_title">Название задачи:</string>
+    <string name="start_date">Начало:</string>
+    <string name="end_date">Конец:</string>
+    <string name="stages_done">Сделано:</string>
+    <string name="stage_description">Описание подзадачи:</string>
+    <string name="database_error">Ошибка базы данных. Попробуйте снова.</string>
+    <string name="empty_stage">Пожалуйста создайте минимум одну подзадачу</string>
+    <string name="empty_start_date">Пожалуйста выберите дату начала</string>
+    <string name="empty_end_date">Пожалуйста выберите дату завершения</string>
+    <string name="empty_task_name">Пожалуйста введите название задачи</string>
+</resources>
