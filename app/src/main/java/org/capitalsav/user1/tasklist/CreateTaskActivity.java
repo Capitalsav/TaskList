@@ -151,10 +151,16 @@ public class CreateTaskActivity extends AppCompatActivity
     public void onFinishEditStageDialog(DialogFragment dialogFragment) {
         Dialog dialog = dialogFragment.getDialog();
         EditText editText = (EditText) dialog.findViewById(R.id.edit_text_stage_name);
-        MyStage myStage = new MyStage();
-        myStage.setStageName(editText.getText().toString());
-        mMyStageList.add(myStage);
-        mAdapter.notifyDataSetChanged();
+        if (editText.getText().toString().equals("")){
+            Toast.makeText(this, R.string.empty_stage_name, Toast.LENGTH_SHORT).show();
+        }
+        else {
+            MyStage myStage = new MyStage();
+            myStage.setStageName(editText.getText().toString());
+            mMyStageList.add(myStage);
+            mAdapter.notifyDataSetChanged();
+        }
+
     }
 
     private void createTaskInDatabase() {
