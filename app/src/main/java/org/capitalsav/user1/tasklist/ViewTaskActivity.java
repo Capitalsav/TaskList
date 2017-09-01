@@ -31,11 +31,13 @@ public class ViewTaskActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_task);
+
         mTextViewTitle = (TextView) findViewById(R.id.tv_task_title_view);
         mTextViewStartDate = (TextView) findViewById(R.id.tv_start_date_view);
         mTextViewEndDate = (TextView) findViewById(R.id.tv_end_date_view);
         mTextViewStageCount = (TextView) findViewById(R.id.tv_stages_count_view);
         mTextViewStageDescription = (TextView) findViewById(R.id.tv_stages_description);
+
         Intent intent = getIntent();
         mMyTask = (MyTask) intent.getSerializableExtra(INTENT_EXTRA_TASK);
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -43,48 +45,8 @@ public class ViewTaskActivity extends AppCompatActivity {
         mTextViewStartDate.setText(format.format(mMyTask.getStartDate().getTime()));
         mTextViewEndDate.setText(format.format(mMyTask.getEndDate().getTime()));
         mTaskManagerDbHelper = new TaskManagerDbHelper(this);
+
         setCurrentStage();
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent = new Intent();
-        setResult(RESULT_CANCELED, intent);
-        finish();
-    }
-
-    public void onClickStageDone(View view) {
-        ArrayList<MyStage> arrayList = mMyTask.getMyStages();
-        for (int i = 0; i < arrayList.size(); i++) {
-            if (arrayList.get(i).getIsStageDone() == MyStage.NOT_DONE){
-                if (setStageDoneDb(arrayList.get(i).getStageId()) >= 0) {
-                    arrayList.get(i).setIsStageDone(MyStage.DONE);
-                    setCurrentStage();
-                }
-                else {
-                    Toast.makeText(this, R.string.database_error, Toast.LENGTH_SHORT).show();
-                }
-                break;
-            }
-        }
-    }
-
-    public void onClickDeleteSingleTask(View view) {
-        if (deleteTask(mMyTask.getTaskId()) >= 0) {
-            Intent intent = new Intent();
-            setResult(RESULT_OK, intent);
-            finish();
-        }
-        else {
-            Toast.makeText(this, R.string.database_error, Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public void onClickBackFromViewTask(View view) {
-        Intent intent = new Intent();
-        setResult(RESULT_CANCELED, intent);
-        finish();
     }
 
     private void setCurrentStage() {
@@ -105,6 +67,22 @@ public class ViewTaskActivity extends AppCompatActivity {
         checkStagesDone();
     }
 
+    public void onClickStageDone(View view) {
+        ArrayList<MyStage> arrayList = mMyTask.getMyStages();
+        for (int i = 0; i < arrayList.size(); i++) {
+            if (arrayList.get(i).getIsStageDone() == MyStage.NOT_DONE){
+                if (setStageDoneDb(arrayList.get(i).getStageId()) >= 0) {
+                    arrayList.get(i).setIsStageDone(MyStage.DONE);
+                    setCurrentStage();
+                }
+                else {
+                    Toast.makeText(this, R.string.database_error, Toast.LENGTH_SHORT).show();
+                }
+                break;
+            }
+        }
+    }
+
     private int setStageDoneDb(int stageId) {
         SQLiteDatabase database = mTaskManagerDbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -112,7 +90,7 @@ public class ViewTaskActivity extends AppCompatActivity {
         String[] whereValues = {String.valueOf(stageId)};
         int rows = -1;
         try {
-           rows = database.update(TaskManagerContract.StageInDb.TABLE_NAME, contentValues,
+            rows = database.update(TaskManagerContract.StageInDb.TABLE_NAME, contentValues,
                     TaskManagerContract.StageInDb._ID + "= ?", whereValues );
 
         }
@@ -125,7 +103,48 @@ public class ViewTaskActivity extends AppCompatActivity {
         return rows;
     }
 
-    private int deleteTask(int taskId) {
+    private void checkStagesDone() {
+        ArrayList<MyStage> arrayList = mMyTask.getMyStages();
+        int count = 0;
+        for (MyStage stage : arrayList){
+            if (stage.getIsStageDone() == MyStage.DONE) {
+                count++;
+            }
+        }
+        if (arrayList.size() == count){
+            deleteTask();
+        }
+    }
+
+    private void deleteTask() {
+        if (deleteTaskFromDatabase(mMyTask.getTaskId()) >= 0) {
+            Intent intent = new Intent();
+            setResult(RESULT_OK, intent);
+            finish();
+        }
+        else {
+            Toast.makeText(this, R.string.database_error, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void onClickBackFromViewTask(View view) {
+        Intent intent = new Intent();
+        setResult(RESULT_CANCELED, intent);
+        finish();
+    }
+
+    public void onClickDeleteSingleTask(View view) {
+        if (deleteTaskFromDatabase(mMyTask.getTaskId()) >= 0) {
+            Intent intent = new Intent();
+            setResult(RESULT_OK, intent);
+            finish();
+        }
+        else {
+            Toast.makeText(this, R.string.database_error, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private int deleteTaskFromDatabase(int taskId) {
         SQLiteDatabase database = mTaskManagerDbHelper.getWritableDatabase();
         int rows = -1;
         try {
@@ -142,23 +161,11 @@ public class ViewTaskActivity extends AppCompatActivity {
 
     }
 
-    private void checkStagesDone() {
-        ArrayList<MyStage> arrayList = mMyTask.getMyStages();
-        int count = 0;
-        for (MyStage stage : arrayList){
-            if (stage.getIsStageDone() == MyStage.DONE) {
-                count++;
-            }
-        }
-        if (arrayList.size() == count){
-            if (deleteTask(mMyTask.getTaskId()) >= 0) {
-                Intent intent = new Intent();
-                setResult(RESULT_OK, intent);
-                finish();
-            }
-            else {
-                Toast.makeText(this, R.string.database_error, Toast.LENGTH_SHORT).show();
-            }
-        }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent();
+        setResult(RESULT_CANCELED, intent);
+        finish();
     }
 }
