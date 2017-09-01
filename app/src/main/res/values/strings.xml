@@ -22,4 +22,5 @@
     <string name="empty_end_date">Please select end date</string>
     <string name="empty_task_name">Please input task name</string>
     <string name="empty_stage_name">Please input stage name</string>
+    <string name="date_parse_error">Date parse error. Please try again.</string>
 </resources>

@@ -23,7 +23,6 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity {
 
     public final static String INTENT_LIST_FOR_NOTIFICATION = "tasks for notification";
-    public final static String DATE_PARSE_ERROR = "Date parse error.";
     public final static int REQUEST_CODE_VIEW_TASK = 2;
     private final static int REQUEST_CODE_NEW_TASK = 1;
 
@@ -60,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
     }
 
     public void onClickCreateTask(View view) {
@@ -163,8 +161,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             calendar.setTime(dateFormat.parse(string));
         } catch (ParseException e) {
-            e.printStackTrace();
-            Toast.makeText(this, DATE_PARSE_ERROR, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.date_parse_error, Toast.LENGTH_SHORT).show();
         }
         calendar.add(Calendar.MONTH, 1);
         return calendar;
@@ -189,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             rows = database.delete(TaskManagerContract.TaskInDb.TABLE_NAME, TaskManagerContract.TaskInDb._ID + "= ?", new String[]{String.valueOf(taskId)});
         } catch (Exception e) {
-            e.printStackTrace();
+            Toast.makeText(this, R.string.database_error, Toast.LENGTH_SHORT).show();
         } finally {
             database.close();
         }
