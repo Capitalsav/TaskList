@@ -23,4 +23,5 @@
     <string name="empty_task_name">Please input task name</string>
     <string name="empty_stage_name">Please input stage name</string>
     <string name="date_parse_error">Date parse error. Please try again.</string>
+    <string name="no_tasks">You don\'t have any tasks. Let\'s create one.</string>
 </resources>

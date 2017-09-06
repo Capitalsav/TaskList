@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user1.tasklist.R;
@@ -34,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private AlarmManager mAlarmManager;
     private Calendar mCurrentCalendar;
     private Calendar mTargetCalendar;
+    private TextView mTextViewNoTasks;
+    private Button mButtonDeleteMultipleTasks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,12 +57,11 @@ public class MainActivity extends AppCompatActivity {
         mTargetCalendar.set(Calendar.MINUTE, 30);
         mTargetCalendar.set(Calendar.SECOND, 0);
         mTargetCalendar.set(Calendar.AM_PM, Calendar.AM);
-        selectAllTasks();
-    }
+        mTextViewNoTasks = (TextView) findViewById(R.id.tv_no_tasks);
+        mButtonDeleteMultipleTasks = (Button) findViewById(R.id.btn_delete_multiple_tasks);
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+        selectAllTasks();
+        showTextIfNoTasks();
     }
 
     public void onClickCreateTask(View view) {
@@ -70,8 +73,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         mTaskArrayList.clear();
         selectAllTasks();
+        showTextIfNoTasks();
         mAdapter.notifyDataSetChanged();
-
     }
 
     private void selectAllTasks() {
@@ -178,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+        showTextIfNoTasks();
     }
 
     private int deleteTask(int taskId) {
@@ -210,6 +214,19 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             mAlarmManager.setRepeating(AlarmManager.RTC_WAKEUP, targetTime, AlarmManager.INTERVAL_DAY, pendingIntent);
+        }
+    }
+
+    private void showTextIfNoTasks() {
+        if (mTaskArrayList.size() == 0) {
+            mButtonDeleteMultipleTasks.setVisibility(View.GONE);
+            mRecyclerView.setVisibility(View.GONE);
+            mTextViewNoTasks.setVisibility(View.VISIBLE);
+        }
+        else {
+            mButtonDeleteMultipleTasks.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.VISIBLE);
+            mTextViewNoTasks.setVisibility(View.GONE);
         }
     }
 }

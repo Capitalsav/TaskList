@@ -22,4 +22,5 @@
     <string name="empty_end_date">Пожалуйста выберите дату завершения</string>
     <string name="empty_task_name">Пожалуйста введите название задачи</string>
     <string name="empty_stage_name">Пожалуйста введите название подзадачи</string>
+    <string name="no_tasks">У вас нет задач. Давайте создадим одну.</string>
 </resources>
