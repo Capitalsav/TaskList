@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Список завдань</string>
+    <string name="create_button">Створити</string>
+    <string name="delete_button">Видалити</string>
+    <string name="save_task_button">Зберегти</string>
+    <string name="input_stage_name_title">Будь ласка створіть етап</string>
+    <string name="create_stage_button">Створити етап</string>
+    <string name="back_button">Назад</string>
+    <string name="start_date_button">Початок</string>
+    <string name="end_date_button">Завершення</string>
+    <string name="select_start_date">Оберіть дату початку</string>
+    <string name="select_end_date">Оберіть дату завершення</string>
+    <string name="stage_done_button">Етап виконано</string>
+    <string name="task_title">Назва завдання:</string>
+    <string name="start_date">Початок:</string>
+    <string name="end_date">Кінець:</string>
+    <string name="stages_done">Виконано:</string>
+    <string name="stage_description">Опис етапу:</string>
+    <string name="database_error">Помилка бази данних. Спробуйте знову</string>
+    <string name="empty_stage">Будь ласка створіть мінімум один етап</string>
+    <string name="empty_start_date">Будь ласка оберіть дату початку</string>
+    <string name="empty_end_date">Будь ласка оберіть дату завершення</string>
+    <string name="empty_task_name">Будь ласка введіть назву задачі</string>
+    <string name="empty_stage_name">Будь ласка введіть назву етапу</string>
+</resources>
