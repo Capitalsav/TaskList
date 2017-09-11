@@ -38,6 +38,7 @@
             android:textSize="20sp"
             android:textColor="@color/colorDarkText"
             android:layout_toEndOf="@id/circle_progress_id"
+            android:layout_toRightOf="@+id/circle_progress_id"
             android:maxLines="1"
             android:ellipsize="end"
             android:fontFamily="sans-serif-light"
@@ -50,6 +51,7 @@
             style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
             android:indeterminate="false"
             android:layout_toEndOf="@id/circle_progress_id"
+            android:layout_toRightOf="@+id/circle_progress_id"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="4dp"/>
     </RelativeLayout>
