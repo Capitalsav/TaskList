@@ -22,5 +22,6 @@
     <string name="empty_end_date">Будь ласка оберіть дату завершення</string>
     <string name="empty_task_name">Будь ласка введіть назву задачі</string>
     <string name="empty_stage_name">Будь ласка введіть назву етапу</string>
+    <string name="date_parse_error">Помилка дати. Будь ласка спробуйте знову.</string>
     <string name="no_tasks">У вас немає завдань. Давайте створимо одне.</string>
 </resources>
